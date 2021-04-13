@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import React, { Component } from 'react';
+import { url, headers } from 'config'
 // react-bootstrap components
 import {
   Badge,
@@ -61,10 +62,12 @@ handleChange (e) {
         city
       } =  this.state;
       console.log(JSON.stringify(this.state));
-      axios.post('https://localhost:3001/users', 
+      axios.post(url+'/users', 
      
         
           JSON.stringify(this.state)
+          
+          
         
       )
       .then(function (response) { 

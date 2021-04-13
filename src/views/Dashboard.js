@@ -21,7 +21,7 @@ function Dashboard() {
     <>
       <Container fluid>
         <Row>
-          <Col lg="3" sm="6">
+          {/*<Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -46,8 +46,8 @@ function Dashboard() {
                 </div>
               </Card.Footer>
             </Card>
-          </Col>
-          <Col lg="3" sm="6">
+  </Col>*/}
+          {/*<Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -72,8 +72,8 @@ function Dashboard() {
                 </div>
               </Card.Footer>
             </Card>
-          </Col>
-          <Col lg="3" sm="6">
+          </Col>*/}
+          {/*<Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -98,37 +98,12 @@ function Dashboard() {
                 </div>
               </Card.Footer>
             </Card>
-          </Col>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-favourite-28 text-primary"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Followers</p>
-                      <Card.Title as="h4">+45K</Card.Title>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update now
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
+        </Col>*/}
+          
         </Row>
         <Row>
           <Col md="8">
-            <Card>
+            {/*<Card>
               <Card.Header>
                 <Card.Title as="h4">Users Behavior</Card.Title>
                 <p className="card-category">24 Hours performance</p>
@@ -198,10 +173,10 @@ function Dashboard() {
                   Updated 3 minutes ago
                 </div>
               </Card.Footer>
-            </Card>
+                  </Card>*/}
           </Col>
           <Col md="4">
-            <Card>
+           {/*} <Card>
               <Card.Header>
                 <Card.Title as="h4">Email Statistics</Card.Title>
                 <p className="card-category">Last Campaign Performance</p>
@@ -231,11 +206,11 @@ function Dashboard() {
                   Campaign sent 2 days ago
                 </div>
               </Card.Body>
-            </Card>
+                  </Card>*/}
           </Col>
         </Row>
         <Row>
-          <Col md="6">
+          {/*<Col md="6">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">2017 Sales</Card.Title>
@@ -327,9 +302,9 @@ function Dashboard() {
                 </div>
               </Card.Footer>
             </Card>
-          </Col>
+                  </Col>*/}
           <Col md="6">
-            <Card className="card-tasks">
+           {/* <Card className="card-tasks">
               <Card.Header>
                 <Card.Title as="h4">Tasks</Card.Title>
                 <p className="card-category">Backend development</p>
@@ -629,7 +604,7 @@ function Dashboard() {
                   Updated 3 minutes ago
                 </div>
               </Card.Footer>
-            </Card>
+            </Card>*/}
           </Col>
         </Row>
       </Container>

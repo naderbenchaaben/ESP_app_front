@@ -99,12 +99,12 @@ function Header() {
                 >
                   Notification 1
                 </Dropdown.Item>
-                <Dropdown.Item
+               {/* <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
                 >
                   Notification 2
-                </Dropdown.Item>
+                </Dropdown.Item>                                            
                 <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
@@ -116,13 +116,13 @@ function Header() {
                   onClick={(e) => e.preventDefault()}
                 >
                   Notification 4
-                </Dropdown.Item>
+                </Dropdown.Item>*/}
                 <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
-                >
+               >
                   Another notification
-                </Dropdown.Item>
+               </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Nav.Item>

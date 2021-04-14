@@ -61,22 +61,23 @@ handleChange (e) {
         fieldofbusiness,
         city
       } =  this.state;
-      console.log(JSON.stringify(this.state));
-      axios.post(url+'/users', 
-     
-        
-          JSON.stringify(this.state)
-          
-          
-        
-      )
-      .then(function (response) { 
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+
+    // Entrez un mdp >= 6 caracteres
+    // Il faut mentionner que le mot de passe minimum 6 caracteres avant d'envoyer au serveur ;) 
+    axios.post(url +"/users", {
+      user:{
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation
+      }
+    },
+    ).then( response =>{  //axios returns a promise
+      console.log("registration response ", response )
+    }).catch(error =>{
+      console.log("registration error ", error)
+    })
+
+    }
 
 
   render() {

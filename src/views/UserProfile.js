@@ -25,9 +25,14 @@ class User extends Component {
         password_confirmation: '',
         lastName: '',
         firstName: '',
+        telnum: '',
         companyname: '',
         fieldofbusiness: '',
-        city: ''
+        city: '',
+        if_admin: true,
+        if_Topadmin: false,
+        if_client: false
+
       
     };
     this.handleChange = this.handleChange.bind(this);  
@@ -57,20 +62,30 @@ handleChange (e) {
         password_confirmation,
         lastName,
         firstName,
+        telnum,
         companyname,
         fieldofbusiness,
-        city
+        city,
+        if_admin
       } =  this.state;
 
     // Entrez un mdp >= 6 caracteres
     // Il faut mentionner que le mot de passe minimum 6 caracteres avant d'envoyer au serveur ;) 
     axios.post(url +"/users", {
-      user:{
+     user:{
         email: email,
         password: password,
-        password_confirmation: password_confirmation
-      }
-    },
+        password_confirmation: password_confirmation,
+        lastName: lastName,
+        firstName: firstName,
+        companyname: companyname,
+        fieldofbusiness: fieldofbusiness,
+        city: city
+
+
+     }
+    }
+    
     ).then( response =>{  //axios returns a promise
       console.log("registration response ", response )
     }).catch(error =>{
@@ -123,7 +138,7 @@ handleChange (e) {
                       </Col>
                       </Row>
                       <Row>
-                      <Col className="pl-1" md="6">
+                      <Col className="pr-1" md="6">
                         <Form.Group>
                           <label>Conformez mot de passe</label>
                           
@@ -160,6 +175,20 @@ handleChange (e) {
                           ></Form.Control>
                         </Form.Group>
                       </Col>
+                      <Row>
+                      <Col className="pr-1" md="10">
+                        <Form.Group>
+                          <label>Numéro de téléphone</label>
+                          
+                          <Form.Control
+                            name="telnum"
+                            placeholder="votre numéro de telephone"
+                            onChange={this.handleChange}
+                            type="text"
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
                       <Col md="12">
                         <Form.Group>
                           <label>Nom du shop/Entreprise</label>

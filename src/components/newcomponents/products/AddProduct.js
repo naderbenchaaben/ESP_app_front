@@ -208,9 +208,9 @@ class AddProduct extends Component {
                 <Row>
                   <Col>
                   
-  <Form.Group>
-    <Form.File id="exampleFormControlFile1" label="Example file input" />
-  </Form.Group>
+                  <Form.Group>
+                    <Form.File id="exampleFormControlFile1" label="ajoutez des photos du produit" />
+                  </Form.Group>
 
                   </Col>
                 </Row>

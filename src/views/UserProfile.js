@@ -23,8 +23,8 @@ class User extends Component {
         email: '',
         password: '',
         password_confirmation: '',
-        lastName: '',
-        firstName: '',
+        lastname: '',
+        firstname: '',
         telnum: '',
         companyname: '',
         fieldofbusiness: '',
@@ -60,8 +60,8 @@ handleChange (e) {
         email,
         password,
         password_confirmation,
-        lastName,
-        firstName,
+        lastname,
+        firstname,
         telnum,
         companyname,
         fieldofbusiness,
@@ -76,15 +76,15 @@ handleChange (e) {
         email: email,
         password: password,
         password_confirmation: password_confirmation,
-        lastName: lastName,
-        firstName: firstName,
+        lastname: lastname,
+        firstname: firstname,
         companyname: companyname,
         fieldofbusiness: fieldofbusiness,
         city: city
 
 
      }
-    }
+    },{ withCredentials: true }
     
     ).then( response =>{  //axios returns a promise
       console.log("registration response ", response )
@@ -156,7 +156,7 @@ handleChange (e) {
                         <Form.Group>
                           <label>Nom</label>
                           <Form.Control
-                            name="lastName"
+                            name="lastname"
                             placeholder="Nom"
                             onChange={this.handleChange}
                             type="text"
@@ -168,7 +168,7 @@ handleChange (e) {
                           <label>Prenom</label>
                           <Form.Control
 
-                            name="firstName"
+                            name="firstname"
                             placeholder="Prenom"
                             onChange={this.handleChange}
                             type="text"

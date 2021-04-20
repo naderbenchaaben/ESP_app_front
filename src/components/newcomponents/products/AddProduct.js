@@ -29,8 +29,8 @@ class AddProduct extends Component {
       shortDesc: "",  
       description: "",
       available_quantity: "",
-    }
-    ;
+    };
+    this.handleChange = this.handleChange.bind(this);  
   }
 
   handleChange (e) {
@@ -62,11 +62,20 @@ class AddProduct extends Component {
             available_quantity 
           } =  this.state;
           console.log(JSON.stringify(this.state));
-          axios.post(url+'/api/v2/products',
-              JSON.stringify(this.state)
+          axios.post(url+'/api/v2/products',{
+          product:{
+            product_name: product_name,
+            ref_product: ref_product,
+            price: price,
+            shortDesc: shortDesc,
+            description: description,
+            available_quantity: available_quantity
+
+          }
+        }  
           )
           .then(function (response) { 
-            console.log(response);
+            console.log("product-addition", response);
           })
           .catch(function (error) {
             console.log(error);

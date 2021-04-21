@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { connect } from 'react-redux'
 import Login from './components/Login/Login.js'
 import AdminLayout from "layouts/Admin.js";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -24,7 +25,7 @@ render(){
     <BrowserRouter>
   
         <Switch>
-             
+            <Login/>
             <Route path="/admin" render={(props) => <AdminLayout {...props} loggedInStatus={this.state.loggedInStatus} />} />
             <Redirect from="/" to="/admin/dashboard" />
         </Switch>
@@ -33,6 +34,11 @@ render(){
   </BrowserRouter> 
     </div>
   );
-}
-    }
-export default App;
+}}
+const mapStateToProps = (state) => {
+    return({
+        user: state.userReducer
+    })
+  }
+  
+  export default connect(mapStateToProps)(App);

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 //import jwt_decode from 'jwt-decode';
+import { loginAction } from '../../actions'
+import { connect } from 'react-redux'
 import './login.scss'
 import axios from 'axios';
-import { url, headers } from 'config'
+import { url } from 'config'
 import {
   Badge,
   Button,   
@@ -30,7 +32,8 @@ class Login extends Component {
       
         email: null,
         password: null,
-        error: ''
+        error: '',
+       
     };
     this.handleChange = this.handleChange.bind(this);  
 }
@@ -68,11 +71,17 @@ handleChange (e) {
      }
     },
     
-    ).then( response =>{  //axios returns a promise
-      console.log("Login response ", response )
-    }).catch(error =>{
-      console.log("Login error ", error)
-    })
+    ).then( res=>{
+        if(res.data) {
+          this.props.loginAction(res.data.user)
+          localStorage.setItem('user', res.data.user)
+          console.log("Login response ", res )
+          console.log(this.props.user)
+          //console.log(res.data.user)
+        }
+        }).catch(error =>{
+          console.log("Login error ", error)
+        })
 
     }
     render (){
@@ -115,5 +124,9 @@ handleChange (e) {
         );
     }
 }
-        
-    export default Login;
+const mapStateToProps = (state) => {
+  return({
+      user: state.userReducer
+  })
+}    
+    export default connect(mapStateToProps, {loginAction})(Login);

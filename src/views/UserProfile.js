@@ -16,8 +16,8 @@ import {
 } from "react-bootstrap";
 
 class User extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       
         email: '',
@@ -39,6 +39,7 @@ class User extends Component {
 }
 handleChange (e) {
   this.setState({ [e.target.name]: e.target.value });
+  
 };
   
  
@@ -218,6 +219,7 @@ handleChange (e) {
                       <Col className="px-1" md="4">
                         <Form.Group>
                           <label>ville </label>
+                          <h1>{this.props.loggedInStatus}</h1>
                           <Form.Control
                             name="city"
                             placeholder="ville"

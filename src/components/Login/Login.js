@@ -28,17 +28,22 @@ class Login extends Component {
     super(props);
     this.state = {
       
-        email: '',
-        password: ''
+        email: null,
+        password: null,
+        error: ''
     };
     this.handleChange = this.handleChange.bind(this);  
 }
 handleChange (e) {
+    
     this.setState({ [e.target.name]: e.target.value });
   };
-  handleSubmit = e => {
-   
+  handleSubmit = (e) => {
     e.preventDefault();
+    const { email , password } = this.state;
+    if(!email){ this.setState({ error: 'veuillez saisir votre email' }) }
+    if(!password){ this.setState({ error: 'veuillez saisir votre mot de passe' }) }
+    if(!email && !password){ this.setState({ error: 'veuillez saisir votre email et mot de passe' }) }
     
     console.log(this.state);
     //console.log(JSON.stringify(this.state, null, 2));
@@ -50,11 +55,8 @@ handleChange (e) {
       .post("http://localhost:3001/users", this.state)
       .then(res => console.log(res))
       .catch(err => console.log(err));*/
-      const {
-        email,
-        password,
-       
-      } =  this.state;
+      
+      
 
     // Entrez un mdp >= 6 caracteres
     // Il faut mentionner que le mot de passe minimum 6 caracteres avant d'envoyer au serveur ;) 
@@ -74,6 +76,7 @@ handleChange (e) {
 
     }
     render (){
+        
         return(
             <div className="login">
 {/* { loading ? <Loading /> : '' }*/}
@@ -92,7 +95,7 @@ handleChange (e) {
                     <form onSubmit={this.handleSubmit}>
                         <h2>connexion admin</h2>
 
-                        {/*<p className="error"> {error} </p> */}
+                        <p className="error"> {this.error} </p> 
 
                         <label style={{ top: '30px' }} htmlFor="Email">Email</label>
                         <br/>

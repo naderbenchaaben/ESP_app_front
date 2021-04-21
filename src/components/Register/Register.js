@@ -72,7 +72,10 @@ handleChange (e) {
         companyname,
         fieldofbusiness,
         city,
-        if_admin
+        if_admin,
+        if_client,
+        if_Topadmin
+
       } =  this.state;
 
     // Entrez un mdp >= 6 caracteres
@@ -87,9 +90,9 @@ handleChange (e) {
         companyname: companyname,
         fieldofbusiness: fieldofbusiness,
         city: city,
-        if_admin: true,
-        if_Topadmin: false,
-        if_client: false
+        if_admin: if_admin,
+        if_Topadmin: if_Topadmin,
+        if_client: if_client
 
 
      }

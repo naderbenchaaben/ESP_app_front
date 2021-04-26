@@ -70,11 +70,15 @@ handleChange (e) {
     },
     
     ).then( res=>{
-        if(res.data) {
+        if(res.data.logged_in) {
           this.props.loginAction(res.data.user)
-          localStorage.setItem('user', res.data.user)
-          console.log("Login response ", res )
-          console.log(this.props.user)
+          localStorage.setItem('user', JSON.stringify(res.data.user))
+          console.log("Login response ", res.data.logged_in)
+          console.log("Login response 1 ", res)
+          console.log(this.props.user.data)
+          
+            console.log(localStorage.getItem("user"))
+          
           //console.log(res.data.user)
         }
         }).catch(error =>{
@@ -86,7 +90,7 @@ handleChange (e) {
         
         return(
             <div className="login">
-              {/* { this.props.user.login ? <Redirect to="admin/dashboard" /> : '' }  */}
+               { this.props.user.login ? <Redirect to="admin/dashboard" /> : '' }  
 
                 <div className="left">
                     <img className="background" src={imgBackground} alt="imgBackground"/>
@@ -119,10 +123,10 @@ handleChange (e) {
                        
                     </form>
                     <div className="a">
-                  { /* <Link
+                   <Link
                     to="/Register"
                     >Créer un compte
-                  </Link>  */}
+                  </Link> 
                      </div>
                 </div>  
                 

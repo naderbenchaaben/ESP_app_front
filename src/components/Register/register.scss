@@ -76,13 +76,12 @@
         #email {
             top: 50px;
         }
-
-
         #password {
             top: 120px;
         }   
-        #password-conformation {
+        #password-confirmation {
             top: 190px;
+            
         }
         #lastname {
             top: 260px;
@@ -90,14 +89,17 @@
         #firstname {
             top: 330px;
         }
-        #companyname {
+        #telnum {
             top: 400px;
         }
-        #fieldofbusiness {
+        #companyname {
             top: 470px;
         }
-        #city {
+        #fieldofbusiness {
             top: 540px;
+        }
+        #city {
+            top: 610px;
         }
 
 
@@ -112,7 +114,7 @@
             box-shadow: 0px 3px 20px lightgrey;
             transition: 0.5s;
             position: absolute;
-            top: 610px;
+            top: 670px;
             animation: button 1.5s ease-in;
         }
 

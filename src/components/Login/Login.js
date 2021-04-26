@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-//import jwt_decode from 'jwt-decode';
+import { Redirect, Link } from "react-router-dom";
 import { loginAction } from '../../actions'
 import { connect } from 'react-redux'
 import './login.scss'
 import axios from 'axios';
 import { url } from 'config'
+import imageform from '../../assets/login-form.svg'
+import imgBackground from'../../assets/login-bg.svg'
+import imgPerson from '../../assets/login-person.svg'
+import screen1 from '../../assets/login-screen1.svg'
+import screen2 from '../../assets/login-screen2.svg'
+import screen3 from '../../assets/login-screen3.svg'
+import imgIcons from '../../assets/login-icons.svg'
 import {
   Badge,
   Button,   
@@ -17,14 +23,6 @@ import {
   Row,
   Col
 } from "react-bootstrap";
-
-import imageform from '../../assets/login-form.svg'
-import imgBackground from'../../assets/login-bg.svg'
-import imgPerson from '../../assets/login-person.svg'
-import screen1 from '../../assets/login-screen1.svg'
-import screen2 from '../../assets/login-screen2.svg'
-import screen3 from '../../assets/login-screen3.svg'
-import imgIcons from '../../assets/login-icons.svg'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -88,8 +86,7 @@ handleChange (e) {
         
         return(
             <div className="login">
-{/* { loading ? <Loading /> : '' }*/}
-               {/* { this.props.user.login ? <Redirect to="/dashboard" /> : '' } */}
+              {/* { this.props.user.login ? <Redirect to="admin/dashboard" /> : '' }  */}
 
                 <div className="left">
                     <img className="background" src={imgBackground} alt="imgBackground"/>
@@ -105,7 +102,7 @@ handleChange (e) {
                         <h2>connexion admin</h2>
 
                         <p className="error"> {this.error} </p> 
-
+                        <br/>
                         <label style={{ top: '30px' }} htmlFor="Email">Email</label>
                         <br/>
                         <input onChange={this.handleChange} name="email" id="email" type="text"/>
@@ -118,8 +115,19 @@ handleChange (e) {
                          type="submit"
                          onClick={this.handleSubmit}
                          >Login</button> 
+                        
+                       
                     </form>
+                    <div className="a">
+                  { /* <Link
+                    to="/Register"
+                    >Créer un compte
+                  </Link>  */}
+                     </div>
                 </div>  
+                
+                     
+                    
             </div>
         );
     }
@@ -127,6 +135,7 @@ handleChange (e) {
 const mapStateToProps = (state) => {
   return({
       user: state.userReducer
+      
   })
 }    
     export default connect(mapStateToProps, {loginAction})(Login);

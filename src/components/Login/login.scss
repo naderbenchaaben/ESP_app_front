@@ -48,6 +48,11 @@
             margin-bottom: 20px;
             font-size: 26px;
         }
+         a {
+            top: 170px;
+            position: relative;
+            margin-left: 25px;
+        }
 
         label {
             color: #5daafd;
@@ -74,12 +79,14 @@
         }
 
         #email {
-            top: 60px;
+            top: 70px;
+           
         }
 
 
         #password {
             top: 140px;
+            
         }
 
 

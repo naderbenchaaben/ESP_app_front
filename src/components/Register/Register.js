@@ -4,18 +4,6 @@ import { Redirect } from "react-router-dom";
 import './register.scss'
 import axios from 'axios';
 import { url, headers } from 'config'
-import {
-  Badge,
-  Button,   
-  Card,
-  Form,
-  Navbar,
-  Nav,
-  Container,
-  Row,
-  Col
-} from "react-bootstrap";
-
 import imageform from '../../assets/login-form.svg'
 import imgBackground from'../../assets/login-bg.svg'
 import imgPerson from '../../assets/login-person.svg'
@@ -87,6 +75,7 @@ handleChange (e) {
         password_confirmation: password_confirmation,
         lastname: lastname,
         firstname: firstname,
+        telnum: telnum,
         companyname: companyname,
         fieldofbusiness: fieldofbusiness,
         city: city,
@@ -108,7 +97,7 @@ handleChange (e) {
     render (){
         return(
             <div className="login">
-{/* { loading ? <Loading /> : '' }*/}
+
                {/* { this.props.user.login ? <Redirect to="/dashboard" /> : '' } */}
 
                 <div className="left">
@@ -136,7 +125,7 @@ handleChange (e) {
                         <br/>
                         <label style={{ top: '170px' }} className="password-conformation" htmlFor="password">Password-Confomation</label>
                         <br/>
-                        <input onChange={this.handleChange} name="password_confirmation" id="password_confirmation" type="password"/>
+                        <input onChange={this.handleChange} name="password_confirmation" id="password-confirmation" type="password"/>
                         <br/>
                         <label style={{ top: '240px' }} htmlFor="Nom">Nom</label>
                         <br/>
@@ -146,15 +135,19 @@ handleChange (e) {
                         <br/>
                         <input onChange={this.handleChange} name="firstname" id="firstname" type="text"/>
                         <br/>
-                        <label style={{ top: '380px' }} htmlFor="Nom shop/Entreprise">Nom du shop/Entreprise</label>
+                        <label style={{ top: '380px' }} htmlFor="telnum">Numero de télephone</label>
+                        <br/>
+                        <input onChange={this.handleChange} name="telnum" id="telnum" type="number"/>
+                        <br/>
+                        <label style={{ top: '450px' }} htmlFor="Nom shop/Entreprise">Nom du shop/Entreprise</label>
                         <br/>
                         <input onChange={this.handleChange} name="companyname" id="companyname" type="text"/>
                         <br/>
-                        <label style={{ top: '450px' }} htmlFor="Domaine d'activité">Domaine d'activité</label>
+                        <label style={{ top: '520px' }} htmlFor="Domaine d'activité">Domaine d'activité</label>
                         <br/>
                         <input onChange={this.handleChange} name="fieldofbusiness" id="fieldofbusiness" type="text"/>
                         <br/>
-                        <label style={{ top: '520px' }} htmlFor="ville">ville</label>
+                        <label style={{ top: '590px' }} htmlFor="ville">ville</label>
                         <br/>
                         <input onChange={this.handleChange} name="city" id="city" type="text"/>
                         <br/>

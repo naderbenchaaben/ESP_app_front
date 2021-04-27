@@ -73,7 +73,7 @@ handleChange (e) {
         if(res.data.logged_in) {
           this.props.loginAction(res.data.user)
           localStorage.setItem('user', JSON.stringify(res.data.user))
-          console.log("Login response ", res.data.logged_in)
+          console.log("Login response api ", res.data.logged_in)
           console.log("Login response 1 ", res)
           console.log(this.props.user.data)
           

@@ -19,22 +19,28 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
             }
         }
 render(){
+  const { user } = this.props
   return (
-    <div className="App">
-    <div>
-    </div>
+    
+    
     <BrowserRouter>
-  
+      {
+      user.login ?
         <Switch>
             <Route exact path = "/"><Login/></Route>
             <Route path = "/register"><Register/></Route>
             <Route path="/admin" render={(props) => <AdminLayout {...props}  />} />
             <Redirect from="/" to="/admin/dashboard" />
         </Switch>
-        
- 
+        :
+        <Switch>
+              <Route exact path = "/"><Login/></Route>
+              <Route path = "/register"><Register/></Route>
+        </Switch>
+
+      }
   </BrowserRouter> 
-    </div>
+    
   );
 }}
 const mapStateToProps = (state) => {

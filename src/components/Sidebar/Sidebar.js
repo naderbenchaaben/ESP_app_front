@@ -19,7 +19,8 @@ import React, { Component } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 
 import { Nav } from "react-bootstrap";
-
+import Icons from "views/Icons.js";
+import Dashboard from "views/Dashboard.js";
 import logo from "assets/img/reactlogo.png";
 
 function Sidebar({ color, image, routes }) {
@@ -63,30 +64,39 @@ function Sidebar({ color, image, routes }) {
         } 
         </div>
         <Nav>
-          {routes.map((prop, key) => {
-            if (!prop.redirect)
-              return (
-                <li
-                  className={
-                    prop.upgrade
-                      ? "active active-pro"
-                      : activeRoute(prop.layout + prop.path)
-                  }
-                  key={key}
+        <li
+          className={activeRoute( "/admin/dashboard")}
                 >
-                  <NavLink
-                    to={prop.layout + prop.path}
-                    className="nav-link"
-                    activeClassName="active"
-                  >
-                    <i className={prop.icon} />
-                    <p>{prop.name}</p>
-                  </NavLink>
-                </li>
-              );
-            return null;
-          })}
+          <NavLink
+          to="/admin/dashboard"
+          className="nav-link"
+          activeClassName="active"
+          >
+            <i className="nc-icon nc-chart-pie-35" />
+            <p>Dashboard</p>
+          </NavLink>
+          </li>
         </Nav>
+        <Nav>
+        <li
+          className={activeRoute( "/admin/user")}
+                >
+          <NavLink
+          to="/admin/user"
+          className="nav-link"
+          activeClassName="active"
+          >
+            <i className="nc-icon nc-circle-09" />
+            <p>User Profile</p>
+          </NavLink>
+          </li>
+        </Nav>
+        <Nav>
+          
+        </Nav>
+        
+
+
       </div>
     </div>
   );

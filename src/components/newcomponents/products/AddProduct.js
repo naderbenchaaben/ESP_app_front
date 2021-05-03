@@ -2,7 +2,9 @@ import React, { Component } from "react";
 //import withContext from "../withContext";
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
+import { connect } from 'react-redux'
 import {url, headers} from "config";
+import { DirectUpload } from 'activestorage';
 import {
   Badge,
   Button,
@@ -29,13 +31,20 @@ class AddProduct extends Component {
       shortDesc: "",  
       description: "",
       available_quantity: "",
+      image: {}
     };
     this.handleChange = this.handleChange.bind(this);  
   }
 
-  handleChange (e) {
+  handleChange = (e) => {
+    if (e.target.name === 'image'){
+      this.setState({
+        [e.target.name]: e.target.files[0]
+      })
+
+    }else{
   this.setState({ [e.target.name]: e.target.value });
-};
+  }};
   
 
    // if (product_name && price) {
@@ -77,9 +86,21 @@ class AddProduct extends Component {
           .then(function (response) { 
             console.log("product-addition", response);
           })
+          .then(data => this.uploadFile(this.state.image, data))
           .catch(function (error) {
             console.log(error);
           });
+        }
+          uploadFile = (file, ) => {
+              const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
+              upload.create((error, blob)=> {
+                if (error){
+                  console.log(error)
+                }else{
+                  console.log('there is no error')
+                }
+              })
+          
       };
                                           
                                           
@@ -108,7 +129,7 @@ class AddProduct extends Component {
                                                     }
                                                   };*/ 
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
+ // handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
 
   render() {
     const { product_name, ref_product, price, shortDesc, description, available_quantity  } = this.state;
@@ -219,6 +240,7 @@ class AddProduct extends Component {
                   
                   <Form.Group>
                     <Form.File id="exampleFormControlFile1" label="ajoutez des photos du produit" />
+                    <input type='file' name='image' onChange={this.handleChange} />
                   </Form.Group>
 
                   </Col>
@@ -244,5 +266,10 @@ class AddProduct extends Component {
     );
   }
 }
-
-export default AddProduct;
+const mapStateToProps = (state) => {
+  return({
+      user: state.userReducer
+      
+  })
+}
+export default connect(mapStateToProps) (AddProduct);

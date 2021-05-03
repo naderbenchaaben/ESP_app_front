@@ -23,7 +23,8 @@ import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import AddProduct from "components/newcomponents/products/AddProduct.js";
-import  Login from "components/newcomponents/Login";
+import Products from "components/newcomponents/products/products.js";
+
 
 const dashboardRoutes = [
  /* {
@@ -91,12 +92,13 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-  path: "/Login",
-    name: "Login",
+    path: "/Products",
+    name: "Products",
     icon: "nc-icon nc-bell-55",
-    component: Login,
+    component: Products,
     layout: "/admin",
-  },
+  }
+  
 ];
 
 export default dashboardRoutes;

@@ -92,7 +92,18 @@ function Sidebar({ color, image, routes }) {
           </li>
         </Nav>
         <Nav>
-          
+        <li
+          className={activeRoute( "/admin/Products")}
+                >
+          <NavLink
+          to="/admin/Products"
+          className="nav-link"
+          activeClassName="active"
+          >
+            <i className="nc-icon nc-circle-09" />
+            <p>products</p>
+          </NavLink>
+          </li>
         </Nav>
         
 

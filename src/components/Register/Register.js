@@ -27,7 +27,8 @@ class Register extends Component {
         city: '',
         if_admin: true,
         if_Topadmin: false,
-        if_client: false
+        if_client: false,
+        register_test: '',
 
       
     };
@@ -89,16 +90,21 @@ handleChange (e) {
     
     ).then( response =>{  //axios returns a promise
       console.log("registration response ", response )
+      console.log(this.state.register_test)
+      console.log(response.data.status)
+       this.state.register_test = response.data.status
+      console.log(this.state.register_test)
     }).catch(error =>{
       console.log("registration error ", error)
     })
 
     }
+    
     render (){
         return(
             <div className="login">
 
-               {/* { this.props.user.login ? <Redirect to="/dashboard" /> : '' } */}
+               
 
                 <div className="left">
                     <img className="background" src={imgBackground} alt="imgBackground"/>
@@ -153,9 +159,13 @@ handleChange (e) {
                         <br/>
                         <button
                          type="submit"
-                         onClick={this.handleSubmit}
-                         >register</button> 
+                         onClick={this.handleSubmit } 
+                        
+                         >register</button>  
+                         {console.log(this.state.register_test)}
+                           <Redirect to="/Login" /> 
                     </form>
+                   
                 </div>  
             </div>
         );

@@ -14,7 +14,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
         constructor(){
             super();
             this.state = {
-                loggedInStatus: "Not_LOGGED_IN",
+               
                 user: {}
             }
         }

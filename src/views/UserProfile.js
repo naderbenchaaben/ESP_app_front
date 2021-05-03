@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { url, headers } from 'config'
+import { connect } from 'react-redux'
 // react-bootstrap components
 import {
   Badge,
@@ -28,10 +29,8 @@ class User extends Component {
         telnum: '',
         companyname: '',
         fieldofbusiness: '',
-        city: '',
-        if_admin: true,
-        if_Topadmin: false,
-        if_client: false
+        city: ''
+        
 
       
     };
@@ -39,6 +38,7 @@ class User extends Component {
 }
 handleChange (e) {
   this.setState({ [e.target.name]: e.target.value });
+  console.log(this.props.user.data.id)
   
 };
   
@@ -67,18 +67,19 @@ handleChange (e) {
         companyname,
         fieldofbusiness,
         city,
-        if_admin
+       
       } =  this.state;
 
     // Entrez un mdp >= 6 caracteres
     // Il faut mentionner que le mot de passe minimum 6 caracteres avant d'envoyer au serveur ;) 
-    axios.post(url +"/users", {
+    axios.put(url +"/api/v1/users/"+this.props.user.data.id, {
      user:{
-        email: email,
-        password: password,
-        password_confirmation: password_confirmation,
+       
+       // password: password,
+       // password_confirmation: password_confirmation,
         lastname: lastname,
         firstname: firstname,
+        telnum: telnum,
         companyname: companyname,
         fieldofbusiness: fieldofbusiness,
         city: city
@@ -104,7 +105,7 @@ handleChange (e) {
             <Col md="8">
               <Card>
                 <Card.Header>
-                  <Card.Title as="h4">Creation Compte </Card.Title>
+                  <Card.Title as="h4">Update Compte </Card.Title>
                 </Card.Header>
                 <Card.Body>
                   <Form>
@@ -116,8 +117,8 @@ handleChange (e) {
                           </label>
                           <Form.Control
                             name="email"
-                            placeholder="Email"
-                            onChange={this.handleChange}
+                            placeholder="f"
+                            //onChange={this.handleChange}
                             type="email"
                           ></Form.Control>
                         </Form.Group>
@@ -249,4 +250,11 @@ handleChange (e) {
     );
   }
 }
-export default User;
+const mapStateToProps = (state) => {
+  return({
+      user: state.userReducer
+      
+  })
+} 
+
+export default connect(mapStateToProps) (User);

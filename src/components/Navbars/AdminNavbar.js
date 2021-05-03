@@ -71,7 +71,7 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav mr-auto" navbar>
             <Nav.Item>
-              <Nav.Link
+             {/* <Nav.Link
                 data-toggle="dropdown"
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
@@ -79,9 +79,9 @@ function Header() {
               >
                 <i className="nc-icon nc-palette"></i>
                 <span className="d-lg-none ml-1">Dashboard</span>
-              </Nav.Link>
+             </Nav.Link>*/}
             </Nav.Item>
-            <Dropdown as={Nav.Item}>
+           {/* <Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 as={Nav.Link}
                 data-toggle="dropdown"
@@ -117,15 +117,15 @@ function Header() {
                   onClick={(e) => e.preventDefault()}
                 >
                   Notification 4
-                </Dropdown.Item>*/}
+                </Dropdown.Item>
                 <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
                >
                   Another notification
                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+               </Dropdown.Menu> 
+            </Dropdown>*/}
             <Nav.Item>
               <Nav.Link
                 className="m-0"
@@ -138,7 +138,7 @@ function Header() {
             </Nav.Item>
           </Nav>
           <Nav className="ml-auto" navbar>
-            <Nav.Item>
+            {/*<Nav.Item>
               <Nav.Link
                 className="m-0"
                 href="#pablo"
@@ -192,7 +192,7 @@ function Header() {
                   Separated link
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown>*/}
             <Nav.Item>
               <Nav.Link
                 className="m-0"

@@ -21,7 +21,7 @@ function Dashboard() {
     <>
       <Container fluid>
         <Row>
-          {/*<Col lg="3" sm="6">
+          <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -32,8 +32,8 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Number</p>
-                      <Card.Title as="h4">150GB</Card.Title>
+                      <p className="card-category">Les ordres Active</p>
+                      <Card.Title as="h4">5</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -42,11 +42,11 @@ function Dashboard() {
                 <hr></hr>
                 <div className="stats">
                   <i className="fas fa-redo mr-1"></i>
-                  Update Now
+                  Mettre à
                 </div>
               </Card.Footer>
             </Card>
-  </Col>*/}
+  </Col>
           {/*<Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>

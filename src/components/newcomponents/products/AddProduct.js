@@ -92,14 +92,14 @@ class AddProduct extends Component {
           });
         }
           uploadFile = (file, ) => {
-              const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
+             /* const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
               upload.create((error, blob)=> {
                 if (error){
                   console.log(error)
                 }else{
                   console.log('there is no error')
                 }
-              })
+              })*/
           
       };
                                           

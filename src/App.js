@@ -34,8 +34,8 @@ render(){
         </Switch>
         :
         <Switch>
-              <Route exact path = "/"><Login/></Route>
-              <Route path = "/register"><Register/></Route>
+            <Route exact path = "/"><Login/></Route>
+            <Route path = "/register"><Register/></Route>
         </Switch>
 
       }

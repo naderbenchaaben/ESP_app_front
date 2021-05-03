@@ -116,6 +116,7 @@ handleChange (e) {
                         <input onChange={this.handleChange} name="password" id="password" type="password"/>
                         
                         <button
+                         class= "test"
                          type="submit"
                          onClick={this.handleSubmit}
                          >Login</button> 

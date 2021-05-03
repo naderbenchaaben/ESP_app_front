@@ -6,6 +6,7 @@ import routes from "routes.js";
 import axios from "axios";
 import  { logoutAction } from '../../actions'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 import { getEffectiveConstraintOfTypeParameter } from "typescript";
 import { Redirect, Link } from "react-router-dom";
@@ -37,8 +38,10 @@ function Header(props) {
     axios.delete(url +"/api/v1/logout").then (res => {
       console.log(res)
       props.logoutAction()
+      debugger
       console.log(localStorage.getItem("user"))
       console.log(props.user)
+      props.history.push('/')
       
     }).catch(error => {
       console.log("logout error", error)
@@ -190,12 +193,11 @@ function Header(props) {
             <Nav.Item>
               <Nav.Link
                 className="m-0"
-                href="#pablo"
                 onClick={hundleLogout}
                 
               >
                 <span className="no-icon">Log out</span>
-               {/* props.user.login ? <Redirect to="/Login" /> :''     */}
+               {/* !props.user.login ? <Redirect to="/Login" /> :'' */ }   
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -211,4 +213,4 @@ const mapStateToProps = (state) => {
       user: state.userReducer
 })
 }
-export default connect(mapStateToProps,{ logoutAction }) (Header);
+export default withRouter(connect(mapStateToProps,{ logoutAction }) (Header));

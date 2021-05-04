@@ -1,7 +1,7 @@
 import React, {useState, Fragment}  from 'react'
 import axios from 'axios'
 import { Redirect, Link } from "react-router-dom";
-import {MultiUploader } from '../../Uploader/MultiUploader'
+
 import './product.scss'
 import {url} from "config";
 import {
@@ -72,7 +72,7 @@ return (
            
         
         <button
-        class="test"
+        className="test"
      type="submit"
      onClick={fetchingproducts }
       

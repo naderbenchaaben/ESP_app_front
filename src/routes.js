@@ -24,7 +24,7 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import AddProduct from "components/newcomponents/products/AddProduct.js";
 import Products from "components/newcomponents/products/products.js";
-import { Uploader } from "components/Uploader/MultiUploader";
+
 
 
 const dashboardRoutes = [

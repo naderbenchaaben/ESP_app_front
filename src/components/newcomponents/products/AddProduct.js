@@ -4,8 +4,8 @@ import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux'
 import {url, headers} from "config";
-import {MultiUploader } from '../../Uploader/MultiUploader'
 import ImageUploading from 'react-images-uploading';
+import UploadFiles from "../../Uploader/upload-files.component";
 
 
 import {
@@ -20,6 +20,7 @@ import {
   Col,
   FormControl
 } from "react-bootstrap";
+//import Imageup from "./imageup";
 
  
 
@@ -34,113 +35,69 @@ class AddProduct extends Component {
       shortDesc: "",  
       description: "",
       available_quantity: "",
-      image: {}
+      images: []
 
     };
-    const [images, setImages] = React.useState([]);
-    const maxNumber = 3;
   
-    this.handleChange = this.handleChange.bind(this);  
+    this.handleChange = this.handleChange.bind(this); 
+   // this.selecteFiles= this.selectFiles.bind(this); 
   }
 
-  handleChange = (e) => {
-    if (e.target.name === 'image'){
-      this.setState({
-        [e.target.name]: e.target.files[0]
-      })
+    handleChange = (e) => {
+      
+        this.setState({
+          [event.target.name]: event.target.value
+        
+        })
+  };
 
-    }else{
-  this.setState({ [e.target.name]: e.target.value });
-  }};
-  
+   handlechangeimage= (e) => {
+    this.setState({images : e.target.files});
+   }
 
-   // if (product_name && price) {
-      //const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+
+   
       
 
       handleSubmit = e => {
-   
+        console.log(this.state.images)
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('product_name', this.state.product_name);
+        formData.append('ref_product', this.state.ref_product);
+        formData.append('price', this.state.price);
+        formData.append('description', this.state.description);
+        formData.append('shortDesc', this.state.shortDesc);
         
-        console.log(this.state);
-        //console.log(JSON.stringify(this.state, null, 2));
-        let data = JSON.stringify(this.state);
-        console.log((data, null, 2));
-    
-        
-    
-          const {
-            product_name,
-            ref_product,
-            price,
-            shortDesc,
-            description, 
-            available_quantity 
-          } =  this.state;
-          console.log(JSON.stringify(this.state));
-          axios.post(url+'/api/v2/products',{
-          product:{
-            product_name: product_name,
-            ref_product: ref_product,
-            price: price,
-            shortDesc: shortDesc,
-            description: description,
-            available_quantity: available_quantity
+        formData.append('available_quantity', this.state.available_quantity);
+        let images = this.state.images;
+        var p=new Array();
 
-          }
-        }  
-          )
-          .then(function (response) { 
-            console.log("product-addition", response);
-          })
-         
-          .catch(function (error) {
-            console.log(error);
-          });
+        for(let i=0; i< images.length; i++){
+          p.push(images[i])
         }
-         /*   uploadFile = (file, ) => {
-            const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
-              upload.create((error, blob)=> {
-                if (error){
-                  console.log(error)
-                }else{
-                  console.log('there is no error')
-                }
-              })*/
-          
-      
-                                          
-                                          
-                                        /* this.props.context.addProduct(
-                                            {
-                                              product_name,
-                                              ref_product,
-                                              price,
-                                              shortDesc,
-                                              description,
-                                              available_quantity: available_quantity || 0
-                                              
-                                            },
-                                            () => this.setState(initState)
-                                          );
-                                          this.setState(
-                                            { flash: { status: 'is-success', msg: 'Product created successfully' }}
-                                          );
-                                          
-                                    */
-   
-                                                    /*else {
-                                                      this.setState(
-                                                        { flash: { status: 'is-danger', msg: 'Please enter name and price' }}
-                                                      );
-                                                    }
-                                                  };*/ 
+        debugger
+        formData.append('images', p);
 
- // handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
+              fetch(url+'/api/v2/products', {
+        method: 'POST',
+        body: formData
+      },
+      { withCredentials: true }
+      ).then( response => {
+        console.log("register succeed", response)
+        debugger
+        if (response.status === 200 ){
+          this.props.history.push('/Products');
 
+        }
+      }).catch(error=>console.log(error));
+    }
+    
+        
+                                                
   render() {
-    const { product_name, ref_product, price, shortDesc, description, available_quantity  } = this.state;
-   // const { user } = this.props.context;
+   
 
     return (
      
@@ -217,8 +174,8 @@ class AddProduct extends Component {
                       <label> Bref description</label>
                       
                       <Form.Control
-                        name="Short Description: "
-                        placeholder="description bref"
+                        name="shortDesc"
+                        placeholder="dw2a18wc8escription bref"
                         onChange={this.handleChange}
                         type="text"
                       ></Form.Control>
@@ -233,7 +190,7 @@ class AddProduct extends Component {
                       <Form.Control
                       as="textarea"
                        rows={3}
-                        name="Description"
+                        name="description"
                         placeholder="description du produit"
                         onChange={this.handleChange}
                         type="text"
@@ -250,16 +207,18 @@ class AddProduct extends Component {
                   
                   </Form.Group>
                   
-                 <Link
-                    to="./imageup.js"
-                    >upload images
-                </Link>  
+                  
                 
                   </Col>
                 </Row>
                 
                <Row>
-               
+               handlechangeimage
+          <div className="col-8">
+            <label className="btn btn-default p-0">
+              <input name="imeges" type="file" multiple onChange={this.handlechangeimage} />
+            </label>
+          </div>
 
                </Row> 
                 <Button
@@ -273,6 +232,9 @@ class AddProduct extends Component {
                 <div className="clearfix"></div>
               </Form>
             </Card.Body>
+            <Row>
+              
+            </Row>
           </Card>
         </Col>
       </Row>
@@ -282,10 +244,5 @@ class AddProduct extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return({
-      user: state.userReducer
-      
-  })
-}
-export default connect(mapStateToProps) (AddProduct);
+
+export default AddProduct;

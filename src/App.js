@@ -9,32 +9,40 @@ import "./assets/css/animate.min.css";
 import "./assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
 import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import ProtectedRoute from "./ProtectedRoute"
+import Admin from 'layouts/Admin.js';
 //const App = () =>{
     class App extends Component{
         constructor(){
             super();
             this.state = {
-               
+                loggedInStatus: "Not_LOGGED_IN",
                 user: {}
             }
         }
 render(){
+  const { user } = this.props
   return (
-    <div className="App">
-    <div>
-    </div>
+    
+    
     <BrowserRouter>
-  
+      {
+      user.login ?
         <Switch>
             <Route exact path = "/"><Login/></Route>
             <Route path = "/register"><Register/></Route>
-            <Route path="/admin" render={(props) => <AdminLayout {...props}  />} />
+            <ProtectedRoute path="/admin" component={Admin} login={this.props.user.login} /> 
             <Redirect from="/" to="/admin/dashboard" />
         </Switch>
-        
- 
+        :
+        <Switch>
+            <Route exact path = "/"><Login/></Route>
+            <Route path = "/register"><Register/></Route>
+        </Switch>
+
+      }
   </BrowserRouter> 
-    </div>
+    
   );
 }}
 const mapStateToProps = (state) => {

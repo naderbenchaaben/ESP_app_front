@@ -1,5 +1,8 @@
 import React, {useState, Fragment}  from 'react'
 import axios from 'axios'
+import { Redirect, Link } from "react-router-dom";
+import {MultiUploader } from '../../Uploader/MultiUploader'
+
 import {url} from "config";
 import {
     Badge,
@@ -74,6 +77,11 @@ return (
       
     
      >refrech</button> 
+    
+     <Link
+                    to="./AddProduct"
+                    >Add product
+                  </Link> 
     </div>
     <li>{prodItem}</li>
     <div >

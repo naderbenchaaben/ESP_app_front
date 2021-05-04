@@ -1,27 +1,18 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { Component } from "react";
 import { useLocation } from "react-router-dom";
 import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
-
+import { url } from 'config'
 import routes from "routes.js";
+import axios from "axios";
+import  { logoutAction } from '../../actions'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
-function Header() {
+import { getEffectiveConstraintOfTypeParameter } from "typescript";
+import { Redirect, Link } from "react-router-dom";
+//import props from 'prop-types';
+
+function Header(props) {
   const location = useLocation();
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
@@ -43,6 +34,23 @@ function Header() {
     }
     return "Brand";
   };
+  const hundleLogout=() => {
+    axios.delete(url +"/api/v1/logout").then (res => {
+      console.log(res)
+      props.logoutAction()
+      debugger
+      console.log(localStorage.getItem("user"))
+      console.log(props.user)
+      props.history.push('/')
+      
+    }).catch(error => {
+      console.log("logout error", error)
+      
+    })
+
+    
+}
+  
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -67,21 +75,10 @@ function Header() {
           <span className="navbar-toggler-bar burger-lines"></span>
           <span className="navbar-toggler-bar burger-lines"></span>
         </Navbar.Toggle>
-        
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav mr-auto" navbar>
-            <Nav.Item>
-             {/* <Nav.Link
-                data-toggle="dropdown"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-                className="m-0"
-              >
-                <i className="nc-icon nc-palette"></i>
-                <span className="d-lg-none ml-1">Dashboard</span>
-             </Nav.Link>*/}
-            </Nav.Item>
-           {/* <Dropdown as={Nav.Item}>
+            
+            <Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 as={Nav.Link}
                 data-toggle="dropdown"
@@ -117,15 +114,15 @@ function Header() {
                   onClick={(e) => e.preventDefault()}
                 >
                   Notification 4
-                </Dropdown.Item>
+                </Dropdown.Item>*/}
                 <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
                >
                   Another notification
                </Dropdown.Item>
-               </Dropdown.Menu> 
-            </Dropdown>*/}
+              </Dropdown.Menu>
+            </Dropdown>
             <Nav.Item>
               <Nav.Link
                 className="m-0"
@@ -138,7 +135,7 @@ function Header() {
             </Nav.Item>
           </Nav>
           <Nav className="ml-auto" navbar>
-            {/*<Nav.Item>
+            <Nav.Item>
               <Nav.Link
                 className="m-0"
                 href="#pablo"
@@ -147,7 +144,7 @@ function Header() {
                 <span className="no-icon">Account</span>
               </Nav.Link>
             </Nav.Item>
-            <Dropdown as={Nav.Item}>
+            { /*<Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 aria-expanded={false}
                 aria-haspopup={true}
@@ -192,21 +189,28 @@ function Header() {
                   Separated link
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>*/}
+              </Dropdown>*/}
             <Nav.Item>
               <Nav.Link
                 className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                onClick={hundleLogout}
+                
               >
                 <span className="no-icon">Log out</span>
+               {/* !props.user.login ? <Redirect to="/Login" /> :'' */ }   
               </Nav.Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
+       
       </Container>
     </Navbar>
+      
   );
 }
-
-export default Header;
+const mapStateToProps = (state) => {
+  return ({
+      user: state.userReducer
+})
+}
+export default withRouter(connect(mapStateToProps,{ logoutAction }) (Header));

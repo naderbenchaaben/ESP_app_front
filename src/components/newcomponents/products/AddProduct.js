@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 //import withContext from "../withContext";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux'
 import {url, headers} from "config";
-import { DirectUpload } from 'activestorage';
+import {MultiUploader } from '../../Uploader/MultiUploader'
+import ImageUploading from 'react-images-uploading';
+
+
 import {
   Badge,
   Button,
@@ -32,7 +35,11 @@ class AddProduct extends Component {
       description: "",
       available_quantity: "",
       image: {}
+
     };
+    const [images, setImages] = React.useState([]);
+    const maxNumber = 3;
+  
     this.handleChange = this.handleChange.bind(this);  
   }
 
@@ -86,13 +93,13 @@ class AddProduct extends Component {
           .then(function (response) { 
             console.log("product-addition", response);
           })
-          .then(data => this.uploadFile(this.state.image, data))
+         
           .catch(function (error) {
             console.log(error);
           });
         }
-          uploadFile = (file, ) => {
-             /* const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
+         /*   uploadFile = (file, ) => {
+            const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
               upload.create((error, blob)=> {
                 if (error){
                   console.log(error)
@@ -101,7 +108,7 @@ class AddProduct extends Component {
                 }
               })*/
           
-      };
+      
                                           
                                           
                                         /* this.props.context.addProduct(
@@ -239,13 +246,22 @@ class AddProduct extends Component {
                   <Col>
                   
                   <Form.Group>
-                    <Form.File id="exampleFormControlFile1" label="ajoutez des photos du produit" />
-                    <input type='file' name='image' onChange={this.handleChange} />
+                 {/*  <Form.File id="exampleFormControlFile1" label="ajoutez des photos du produit" /> */  }
+                  
                   </Form.Group>
-
+                  
+                 <Link
+                    to="./imageup.js"
+                    >upload images
+                </Link>  
+                
                   </Col>
                 </Row>
                 
+               <Row>
+               
+
+               </Row> 
                 <Button
                   className="btn-fill pull-right"
                   type="submit"

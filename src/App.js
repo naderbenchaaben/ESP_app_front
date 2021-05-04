@@ -31,7 +31,7 @@ render(){
         <Switch>
             <Route exact path = "/"><Login/></Route>
             <Route path = "/register"><Register/></Route>
-            <ProtectedRoute path="/admin" component={Admin} login={this.props.user.login} /> 
+             <ProtectedRoute path="/admin" component={Admin} login={this.props.user.login} /> 
             <Redirect from="/" to="/admin/dashboard" />
         </Switch>
         :

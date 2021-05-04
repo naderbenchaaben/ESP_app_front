@@ -17,18 +17,19 @@
 */
 import React, { Component } from "react";
 import { useLocation, NavLink } from "react-router-dom";
-
+import { connect } from 'react-redux'
 import { Nav } from "react-bootstrap";
 import Icons from "views/Icons.js";
 import Dashboard from "views/Dashboard.js";
 import logo from "assets/img/reactlogo.png";
 
-function Sidebar({ color, image, routes }) {
+function Sidebar({ color, image, routes , ...rest} ) {
   const location = useLocation();
   const activeRoute = (routeName) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
   return (
+    
     <div className="sidebar" data-image={image} data-color={color}>
       <div
         className="sidebar-background"
@@ -38,21 +39,21 @@ function Sidebar({ color, image, routes }) {
       />
       <div className="sidebar-wrapper">
         <div className="logo d-flex align-items-center justify-content-start">
-          {/*<a
-            href="https://www.creative-tim.com?ref=lbd-sidebar"
+          <a
+              
             className="simple-text logo-mini mx-1"
           >
             <div className="logo-img">
               <img
-                src={require("assets/img/reactlogo.png").default}
+                src={require("assets/img/logo1.jpg").default}
                 alt="..."
               />
             </div>
-          </a>*/}
-         {/* <a className="simple-text" href="http://www.creative-tim.com">
-            Creative Tim
-        </a>*/
-        
+          </a>
+          <a className="simple-text" {...rest}>
+            {rest.user.data.companyname}
+        </a>
+        {/*
        //*** adding a logo and a title   **             */ 
         // side bar would contain 
            // * company Profile 
@@ -112,5 +113,10 @@ function Sidebar({ color, image, routes }) {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return({
+      user: state.userReducer
+  })
+}
 
-export default Sidebar;
+export default connect(mapStateToProps)(Sidebar);

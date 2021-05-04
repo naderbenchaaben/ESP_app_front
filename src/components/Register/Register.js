@@ -11,6 +11,7 @@ import screen1 from '../../assets/login-screen1.svg'
 import screen2 from '../../assets/login-screen2.svg'
 import screen3 from '../../assets/login-screen3.svg'
 import imgIcons from '../../assets/login-icons.svg'
+import { withRouter } from 'react-router'
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -27,8 +28,8 @@ class Register extends Component {
         city: '',
         if_admin: true,
         if_Topadmin: false,
-        if_client: false,
-        register_test: '',
+        if_client: false
+        
 
       
     };
@@ -37,6 +38,9 @@ class Register extends Component {
 handleChange (e) {
     this.setState({ [e.target.name]: e.target.value });
   };
+  goback=()=>{
+   this.props.history.push('/')
+  }
   handleSubmit = e => {
    
     e.preventDefault();
@@ -92,7 +96,7 @@ handleChange (e) {
       console.log("registration response ", response )
       console.log(this.state.register_test)
       console.log(response.data.status)
-       this.state.register_test = response.data.status
+      this.props.history.push('/')
       console.log(this.state.register_test)
     }).catch(error =>{
       console.log("registration error ", error)
@@ -161,9 +165,15 @@ handleChange (e) {
                          type="submit"
                          onClick={this.handleSubmit } 
                         
-                         >register</button>  
-                         {console.log(this.state.register_test)}
-                           <Redirect to="/Login" /> 
+                         >register</button>
+                         <br/> 
+                         <button
+                         class="backb"
+                         type="submit"
+                         onClick={this.goback } 
+                        
+                         >Retour</button>
+
                     </form>
                    
                 </div>  
@@ -172,4 +182,4 @@ handleChange (e) {
     }
 }
         
-    export default Register;
+    export default withRouter(Register);

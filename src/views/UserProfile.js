@@ -105,7 +105,7 @@ handleChange (e) {
             <Col md="8">
               <Card>
                 <Card.Header>
-                  <Card.Title as="h4">Update Compte </Card.Title>
+                  <Card.Title as="h4">Mise à Jour du Profile </Card.Title>
                 </Card.Header>
                 <Card.Body>
                   <Form>
@@ -113,53 +113,26 @@ handleChange (e) {
                       <Col className="pl-1" md="4">
                         <Form.Group>
                           <label htmlFor="exampleInputEmail1">
-                            Email address
+                            email
                           </label>
                           <Form.Control
                             name="email"
-                            placeholder="f"
+                            placeholder={this.props.user.data.email}
                             //onChange={this.handleChange}
+                            
                             type="email"
                           ></Form.Control>
                         </Form.Group>
                       </Col>
                     </Row>
-                    <Row>
-                      <Col className="pr-1" md="6">
-                        <Form.Group>
-                          <label>password</label>
-                          
-                          
-                          <Form.Control
-                            name="password"
-                            placeholder="mot de passe"
-                            onChange={this.handleChange}
-                            type="password"
-                          ></Form.Control>
-                        </Form.Group>
-                      </Col>
-                      </Row>
-                      <Row>
-                      <Col className="pr-1" md="6">
-                        <Form.Group>
-                          <label>Conformez mot de passe</label>
-                          
-                          <Form.Control
-                            name="password_confirmation"
-                            placeholder="confirmer le mot de passe"
-                            onChange={this.handleChange}
-                            type="password"
-                          ></Form.Control>
-                        </Form.Group>
-                      </Col>
-                    </Row>
+                    
                     <Row>
                     <Col className="pr-1" md="5">
                         <Form.Group>
                           <label>Nom</label>
                           <Form.Control
                             name="lastname"
-                            placeholder="Nom"
+                            placeholder={this.props.user.data.lastname}
                             onChange={this.handleChange}
                             type="text"
                           ></Form.Control>
@@ -171,7 +144,7 @@ handleChange (e) {
                           <Form.Control
 
                             name="firstname"
-                            placeholder="Prenom"
+                            placeholder={this.props.user.data.firstname}
                             onChange={this.handleChange}
                             type="text"
                           ></Form.Control>
@@ -184,7 +157,7 @@ handleChange (e) {
                           
                           <Form.Control
                             name="telnum"
-                            placeholder="votre numéro de telephone"
+                            placeholder={this.props.user.data.telnum}
                             onChange={this.handleChange}
                             type="text"
                           ></Form.Control>
@@ -197,7 +170,7 @@ handleChange (e) {
                           
                           <Form.Control
                             name="companyname"
-                            placeholder="le nom du shop/Entreprise"
+                            placeholder={this.props.user.data.companyname}
                             onChange={this.handleChange}
                             type="text"
                           ></Form.Control>
@@ -211,7 +184,7 @@ handleChange (e) {
                          
                           <Form.Control
                             name="fieldofbusiness"
-                            placeholder="activité de votre shop/Entreprise"
+                            placeholder={this.props.user.data.fieldofbusiness}
                             onChange={this.handleChange}
                             type="text"
                           ></Form.Control>
@@ -223,7 +196,7 @@ handleChange (e) {
                           <h1>{this.props.loggedInStatus}</h1>
                           <Form.Control
                             name="city"
-                            placeholder="ville"
+                            placeholder={this.props.user.data.city}
                             onChange={this.handleChange}
                             type="text"
                           ></Form.Control>
@@ -238,7 +211,7 @@ handleChange (e) {
                       variant="info"
                       onClick={this.handleSubmit}
                     >
-                      Update Profile
+                      Mettre à jour
                     </Button>
                     <div className="clearfix"></div>
                   </Form>

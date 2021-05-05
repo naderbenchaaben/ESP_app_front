@@ -52,6 +52,7 @@ class AddProduct extends Component {
   };
 
    handlechangeimage= (e) => {
+     debugger
     this.setState({images : e.target.files});
    }
 
@@ -70,14 +71,14 @@ class AddProduct extends Component {
         formData.append('shortDesc', this.state.shortDesc);
         
         formData.append('available_quantity', this.state.available_quantity);
-        let images = this.state.images;
+        /*let images = this.state.images;
         var p=new Array();
 
         for(let i=0; i< images.length; i++){
           p.push(images[i])
         }
-        debugger
-        formData.append('images', p);
+        debugger*/
+        formData.append('images', this.state.images);
 
               fetch(url+'/api/v2/products', {
         method: 'POST',

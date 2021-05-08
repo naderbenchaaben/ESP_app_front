@@ -16,14 +16,15 @@
 
 */
 import Dashboard from "views/Dashboard.js";
-import UserProfile from "views/UserProfile.js";
+import UserProfile from "components/userprofile/userprofile.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
-import AddProduct from "components/newcomponents/products/AddProduct.js";
-import Products from "components/newcomponents/products/products.js";
+import AddProduct from "components/products/AddProduct.js";
+import UpdateProduct from "components/products/UpdateProduct.js";
+import Products from "components/products/products.js";
 import { Uploader } from "components/Uploader/MultiUploader";
 
 
@@ -44,8 +45,8 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/user",
-    name: "User Profile",
+    path: "/userprofile",
+    name: "user profile",
     icon: "nc-icon nc-circle-09",
     component: UserProfile,
     layout: "/admin",
@@ -98,9 +99,18 @@ const dashboardRoutes = [
     icon: "nc-icon nc-bell-55",
     component: Products,
     layout: "/admin",
+  },
+  {
+    path: "/UpdateProduct",
+    name: "UpdateProducts",
+    icon: "nc-icon nc-bell-55",
+    component: UpdateProduct,
+    layout: "/admin",
   }
+
   
   
 ];
 
 export default dashboardRoutes;
+UpdateProduct

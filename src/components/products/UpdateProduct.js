@@ -2,10 +2,9 @@ import React, { Component } from "react";
 //import withContext from "../withContext";
 import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
-import { connect } from 'react-redux'
 import {url, headers} from "config";
-import {MultiUploader } from '../../Uploader/MultiUploader'
-import ImageUploading from 'react-images-uploading';
+import { withRouter } from 'react-router'
+
 
 
 import {
@@ -24,7 +23,7 @@ import {
  
 
 
-class AddProduct extends Component {
+class UpdateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,12 +33,11 @@ class AddProduct extends Component {
       shortDesc: "",  
       description: "",
       available_quantity: "",
-      image: {}
+      
 
     };
-    const [images, setImages] = React.useState([]);
-    const maxNumber = 3;
-  
+    
+  console.log(this.props)
     this.handleChange = this.handleChange.bind(this);  
   }
 
@@ -54,8 +52,7 @@ class AddProduct extends Component {
   }};
   
 
-   // if (product_name && price) {
-      //const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+  
       
 
       handleSubmit = e => {
@@ -63,7 +60,6 @@ class AddProduct extends Component {
         e.preventDefault();
         
         console.log(this.state);
-        //console.log(JSON.stringify(this.state, null, 2));
         let data = JSON.stringify(this.state);
         console.log((data, null, 2));
     
@@ -83,64 +79,26 @@ class AddProduct extends Component {
             product_name: product_name,
             ref_product: ref_product,
             price: price,
-            shortDesc: shortDesc,
             description: description,
-            available_quantity: available_quantity
-
+            available_quantity: available_quantity,
+            shortDesc:shortDesc
           }
         }  
           )
           .then(function (response) { 
             console.log("product-addition", response);
+           this.props.history.push('/')
           })
          
           .catch(function (error) {
             console.log(error);
           });
         }
-         /*   uploadFile = (file, ) => {
-            const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
-              upload.create((error, blob)=> {
-                if (error){
-                  console.log(error)
-                }else{
-                  console.log('there is no error')
-                }
-              })*/
-          
-      
-                                          
-                                          
-                                        /* this.props.context.addProduct(
-                                            {
-                                              product_name,
-                                              ref_product,
-                                              price,
-                                              shortDesc,
-                                              description,
-                                              available_quantity: available_quantity || 0
-                                              
-                                            },
-                                            () => this.setState(initState)
-                                          );
-                                          this.setState(
-                                            { flash: { status: 'is-success', msg: 'Product created successfully' }}
-                                          );
-                                          
-                                    */
-   
-                                                    /*else {
-                                                      this.setState(
-                                                        { flash: { status: 'is-danger', msg: 'Please enter name and price' }}
-                                                      );
-                                                    }
-                                                  };*/ 
-
- // handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
+       
 
   render() {
     const { product_name, ref_product, price, shortDesc, description, available_quantity  } = this.state;
-   // const { user } = this.props.context;
+  
 
     return (
      
@@ -150,7 +108,7 @@ class AddProduct extends Component {
         <Col md="8">
           <Card>
             <Card.Header>
-              <Card.Title as="h4">Adding Component</Card.Title>
+              <Card.Title as="h4">Modifier Produit</Card.Title>
             </Card.Header>
             <Card.Body>
               <Form>
@@ -217,7 +175,7 @@ class AddProduct extends Component {
                       <label> Bref description</label>
                       
                       <Form.Control
-                        name="Short Description: "
+                        name="shortDesc "
                         placeholder="description bref"
                         onChange={this.handleChange}
                         type="text"
@@ -233,7 +191,7 @@ class AddProduct extends Component {
                       <Form.Control
                       as="textarea"
                        rows={3}
-                        name="Description"
+                        name="description"
                         placeholder="description du produit"
                         onChange={this.handleChange}
                         type="text"
@@ -250,10 +208,7 @@ class AddProduct extends Component {
                   
                   </Form.Group>
                   
-                 <Link
-                    to="./imageup.js"
-                    >upload images
-                </Link>  
+                  
                 
                   </Col>
                 </Row>
@@ -288,4 +243,4 @@ const mapStateToProps = (state) => {
       
   })
 }
-export default connect(mapStateToProps) (AddProduct);
+export default withRouter(UpdateProduct);

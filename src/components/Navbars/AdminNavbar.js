@@ -38,7 +38,7 @@ function Header(props) {
     axios.delete(url +"/api/v1/logout").then (res => {
       console.log(res)
       props.logoutAction()
-      debugger
+      
       console.log(localStorage.getItem("user"))
       console.log(props.user)
       props.history.push('/')

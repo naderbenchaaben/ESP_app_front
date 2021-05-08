@@ -16,7 +16,7 @@ import {
   Col
 } from "react-bootstrap";
 
-class User extends Component {
+class UpdateProfile extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -230,4 +230,4 @@ const mapStateToProps = (state) => {
   })
 } 
 
-export default connect(mapStateToProps) (User);
+export default connect(mapStateToProps) (UpdateProfile);

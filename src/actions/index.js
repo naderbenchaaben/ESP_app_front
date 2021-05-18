@@ -33,3 +33,13 @@ export const logoutAction = () => {
         })
     }
 }
+export const categoryAction = (payload) => {
+    return (dispatch) => {
+        localStorage.setItem('categories', JSON.stringify(payload) )
+        dispatch({
+            type: FETCH_CATEGORIES,
+            payload
+        })
+
+    }
+}

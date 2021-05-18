@@ -37,7 +37,7 @@ class UpdateProduct extends Component {
 
     };
     
-  console.log(this.props)
+    console.log(localStorage.getItem("product"))
     this.handleChange = this.handleChange.bind(this);  
   }
 
@@ -223,7 +223,7 @@ class UpdateProduct extends Component {
                   variant="info"
                   onClick={this.handleSubmit}
                 >
-                  Ajouter Produit
+                  Modifer 
                 </Button>
                 <div className="clearfix"></div>
               </Form>

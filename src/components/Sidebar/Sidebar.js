@@ -94,7 +94,21 @@ function Sidebar({ color, image, routes , ...rest} ) {
         </Nav>
         <Nav>
         <li
-          className={activeRoute( "/admin/Products")}
+          className={activeRoute("/admin/Categories")}
+                >
+          <NavLink
+          to="/admin/Categories"
+          className="nav-link"
+          activeClassName="active"
+          >
+            <i className="nc-icon nc-notes" />
+            <p>Categories</p>
+          </NavLink>
+          </li>
+        </Nav>
+        <Nav>
+        <li
+          className={activeRoute( "/admin/Produits")}
                 >
           <NavLink
           to="/admin/Products"
@@ -102,7 +116,7 @@ function Sidebar({ color, image, routes , ...rest} ) {
           activeClassName="active"
           >
             <i className="nc-icon nc-app" />
-            <p>products</p>
+            <p>produits</p>
           </NavLink>
           </li>
         </Nav>
@@ -122,6 +136,20 @@ function Sidebar({ color, image, routes , ...rest} ) {
         </Nav>
         <Nav>
         <li
+          className={activeRoute( "")}
+                >
+          <NavLink
+          to=""
+          className="nav-link"
+          activeClassName="active"
+          >
+            <i className="nc-icon nc-notes" />
+            <p>commandes</p>
+          </NavLink>
+          </li>
+        </Nav>
+        <Nav>
+        <li
           className={activeRoute( "/admin/icons")}
                 >
           <NavLink
@@ -134,6 +162,7 @@ function Sidebar({ color, image, routes , ...rest} ) {
           </NavLink>
           </li>
         </Nav>
+        
 
 
       </div>

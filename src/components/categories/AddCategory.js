@@ -25,16 +25,11 @@ import {
  
 
 
-class AddProduct extends Component {
+class AddCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_name: "",
-      ref_product:"",
-      price: "",
-      shortDesc: "",  
-      description: "",
-      available_quantity: "",
+      category_name:'',
       
 
     };
@@ -69,28 +64,19 @@ class AddProduct extends Component {
         
     
           const {
-            product_name,
-            ref_product,
-            price,
-            shortDesc,
-            description, 
-            available_quantity 
+            category_name,
+            
           } =  this.state;
           console.log(JSON.stringify(this.state));
-          axios.post(url+'/api/v2/products',{
-          product:{
-            product_name: product_name,
-            ref_product: ref_product,
-            price: price,
-            description: description,
-            available_quantity: available_quantity,
-            shortDesc:shortDesc
+          axios.post(url+'/api/v2/categories',{
+          category:{
+            category_name
           }
         }  
           )
           .then(function (response) { 
-            console.log("product-addition", response);
-           this.props.history.push('./')
+            console.log("category-addition", response);
+           this.props.history.push('/')
           })
          
           .catch(function (error) {
@@ -138,7 +124,7 @@ class AddProduct extends Component {
  // handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
 
   render() {
-    const { product_name, ref_product, price, shortDesc, description, available_quantity  } = this.state;
+    const { category_name} = this.state;
    // const { user } = this.props.context;
 
     return (
@@ -149,18 +135,18 @@ class AddProduct extends Component {
         <Col md="8">
           <Card>
             <Card.Header>
-              <Card.Title as="h4">Ajout Produit</Card.Title>
+              <Card.Title as="h4">category</Card.Title>
             </Card.Header>
             <Card.Body>
               <Form>
                 <Row>
                   <Col className="pl-1" md="6">
                     <Form.Group>
-                      <label htmlFor="product name">
-                        Le nom du produit
+                      <label htmlFor="category name">
+                        La categorie
                       </label>
                       <Form.Control
-                        name="product_name"
+                        name="category_name"
                         placeholder="name of the product"
                         onChange={this.handleChange}
                         type="text"
@@ -168,103 +154,14 @@ class AddProduct extends Component {
                     </Form.Group>
                   </Col>
                 </Row>
-                <Row>
-                  <Col className="pr-1" md="6">
-                    <Form.Group>
-                      <label>La référence du produit</label>
-                      
-                      
-                      <Form.Control
-                        name="ref_product"
-                        placeholder="ref_product"
-                        onChange={this.handleChange}
-                        type="text"
-                      ></Form.Control>
-                    </Form.Group>
-                  </Col>
-                  </Row>
-                  <Row>
-                  <Col className="pl-1" md="6">
-                    <Form.Group>
-                      <label>Prix</label>
-                      
-                      <Form.Control
-                        name="price"
-                        placeholder="le prix du produit"
-                        onChange={this.handleChange}
-                        type="number"
-                        required
-                      ></Form.Control>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                <Col className="pr-1" md="6">
-                    <Form.Group>
-                      <label>Available in Stock:</label>
-                      <Form.Control
-                        name="available_quantity"
-                        placeholder="quantité, en stock"
-                        onChange={this.handleChange}
-                        type="text"
-                      ></Form.Control>
-                    </Form.Group>
-                     </Col>
-                     
-                  <Col md="12">
-                    <Form.Group>
-                      <label> Bref description</label>
-                      
-                      <Form.Control
-                        name="shortDesc "
-                        placeholder="description bref"
-                        onChange={this.handleChange}
-                        type="text"
-                      ></Form.Control>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="pr-1" md="12">
-                    <Form.Group>
-                      <label>Description</label>
-                     
-                      <Form.Control
-                      as="textarea"
-                       rows={3}
-                        name="description"
-                        placeholder="description du produit"
-                        onChange={this.handleChange}
-                        type="text"
-                      ></Form.Control>
-                    </Form.Group>
-                  </Col>
-
-                </Row>
-                <Row>
-                  <Col>
-                  
-                  <Form.Group>
-                 {/*  <Form.File id="exampleFormControlFile1" label="ajoutez des photos du produit" /> */  }
-                  
-                  </Form.Group>
-                  
-                  
-                
-                  </Col>
-                </Row>
-                
-               <Row>
                
-
-               </Row> 
                 <Button
                   className="btn-fill pull-right"
                   type="submit"
                   variant="info"
                   onClick={this.handleSubmit}
                 >
-                  Ajouter Produit
+                  Ajouter categorie
                 </Button>
                 <div className="clearfix"></div>
               </Form>
@@ -278,10 +175,6 @@ class AddProduct extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return({
-      user: state.userReducer
-      
-  })
-}
-export default withRouter(AddProduct);
+
+
+export default withRouter(AddCategory);

@@ -1,4 +1,4 @@
-import React, {useState, Fragment}  from 'react'
+import React, {useState, Fragment, useEffect}  from 'react'
 import axios from 'axios'
 import { Redirect, Link } from "react-router-dom";
 import {MultiUploader } from '../Uploader/MultiUploader'
@@ -21,17 +21,27 @@ import {
 const Products= (props)=> {
 
     const [ products, setProducts] = useState([])
-    const [ updateproduct, setUpdateproduct ] = useState([])
+    const [ updatedproduct, setUpdatedproduct ] = useState()
+    
+   
+    console.log(products)
+    console.log(updatedproduct)
 
     const fetchingproducts= () =>{
         axios.get(url+"/api/v2/products").then(
             res=>{
-                console.log(res.data)
+                
                 setProducts(res.data)
+                
+                //setProducts( products => [...products, res.data]);
                 console.log(products)
             })
             .catch(res => console.log(res))
     }
+    useEffect(()=>{
+      console.log("a")
+      fetchingproducts();
+    },[updatedproduct, products])
     const deleteproduct= (id) =>{
       axios.delete(url+"/api/v2/products/"+id).then(
         res=>{
@@ -45,14 +55,15 @@ const Products= (props)=> {
         <div key={p.id}>
         <Card className="card-stats">
             <Card.Body>
+              <Col>             
               <Row>
-                <Col xs="5">
+                
                   <div className="numbers">
                     
                     <Card.Title as="h4">{p.product_name}</Card.Title>
                   </div>
-                </Col>
-                <Col xs="5">
+                </Row></Col><br/><Col><Row>
+                
                   <br/>
                   <div >
                     <p>Référence : {p.ref_product} </p>
@@ -62,9 +73,9 @@ const Products= (props)=> {
                     <p> Description: {p.description} </p>
                     
                   </div>
-                </Col>
                 
-              </Row>
+                
+              </Row></Col>
             </Card.Body>
             <Card.Footer>
               <hr></hr>
@@ -72,7 +83,9 @@ const Products= (props)=> {
                   <Link to="./UpdateProduct">
                     <button
                   className="product_update_btn"
-                  onClick={()=>setUpdateproduct(p)}
+                  onClick={()=>setUpdatedproduct( p )
+                  }
+                 // setProducts( products => [...products, res.data]);
                    > modifier</button>
                   </Link>
                 <button
@@ -83,7 +96,9 @@ const Products= (props)=> {
               </span>
             </Card.Footer>
           </Card>
+          
           </div>
+
       )
     })
   
@@ -118,6 +133,6 @@ return (
   </div>  
 
 </>
-)
-}
+)}
+
 export default Products;

@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { url, headers } from 'config'
 import { connect } from 'react-redux'
-import { UpdateProfile } from './UpdateProfile'
+
 import './profile.css'
 // react-bootstrap components
 import {
@@ -21,14 +21,32 @@ import {
 class UserProfile extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      
+      email: '',
+      lastname: '',
+      firstname: '',
+      telnum: '',
+      companyname: '',
+      fieldofbusiness: '',
+      city: ''
+      
+  };
     
     this.handleChange = this.handleChange.bind(this);  
 }
+
 handleChange (e) {
-  this.setState({ [e.target.name]: e.target.value });
-  console.log(this.props.user.data.id)
   
-};
+  if (e.target.value){
+   this.setState({ [e.target.name]: e.target.value })
+  }else{
+  
+  let a = e.target.name
+   console.log(a)
+    this.setState({ [e.target.name]: this.props.user.data.a});
+  ;
+}};
   
  
   handleSubmit = e => {
@@ -211,6 +229,8 @@ handleChange (e) {
               </Card>
             </Col>
             /
+
+
             <Col>
             <Card className="card-profile shadow">
               <Row className="justify-content-center">
@@ -248,19 +268,19 @@ handleChange (e) {
                 <div className="text-center">
                   <h3>
                   {this.props.user.data.lastname}
-                    <span className="font-weight-light">    {this.props.user.data.firstname}</span>
+                    <span className="font-weight-light">       {this.props.user.data.firstname} </span>
                   </h3>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
+                    votre email : {this.props.user.data.email}
                   </div>
                   <div className="h5 mt-4">
                     <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
+                     Administrateur de : {this.props.user.data.companyname}
                   </div>
                   <div>
                     <i className="ni education_hat mr-2" />
-                    University of Computer Science
+                    Domain d'activité : {this.props.user.data.fieldofbusiness}
                   </div>
                   
                   

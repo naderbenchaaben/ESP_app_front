@@ -1,5 +1,5 @@
 import React from 'react';
-import ImageUploading from 'react-images-uploading';
+//import ImageUploading from 'react-images-uploading';
  
 export function MultiUploader() {
   const [images, setImages] = React.useState([]);

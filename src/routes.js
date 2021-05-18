@@ -23,8 +23,11 @@ import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import AddProduct from "components/products/AddProduct.js";
+import AddCategory from "components/categories/AddCategory.js";
+
 import UpdateProduct from "components/products/UpdateProduct.js";
 import Products from "components/products/products.js";
+import Categories from "components/categories/Categories.js";
 import { Uploader } from "components/Uploader/MultiUploader";
 
 
@@ -95,7 +98,7 @@ const dashboardRoutes = [
   },
   {
     path: "/Products",
-    name: "Products",
+    name: "Produits",
     icon: "nc-icon nc-bell-55",
     component: Products,
     layout: "/admin",
@@ -105,6 +108,20 @@ const dashboardRoutes = [
     name: "UpdateProducts",
     icon: "nc-icon nc-bell-55",
     component: UpdateProduct,
+    layout: "/admin",
+  },
+  {
+    path: "/Categories",
+    name: "Categories",
+    icon: "nc-icon nc-bell-55",
+    component: Categories,
+    layout: "/admin",
+  },
+  {
+    path: "/AddCategory",
+    name: "AddCategory",
+    icon: "nc-icon nc-bell-55",
+    component: AddCategory,
     layout: "/admin",
   }
 

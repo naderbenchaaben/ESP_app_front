@@ -271,6 +271,7 @@ class AddProduct extends Component {
             </Card.Body>
           </Card>
         </Col>
+////////////////////////////////////////////////////////////
       </Row>
     </Container>
        

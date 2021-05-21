@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux'
+import { categoryAction } from '../../actions'
 import {url, headers} from "config";
 import {MultiUploader } from '../Uploader/MultiUploader'
 //import ImageUploading from 'react-images-uploading';
@@ -35,25 +36,37 @@ class AddProduct extends Component {
       shortDesc: "",  
       description: "",
       available_quantity: "",
+      category: "",
+      categories:[]
       
 
     };
-    
-  
     this.handleChange = this.handleChange.bind(this);  
+    
+   
   }
 
+  componentDidMount(){
+        this.categories = localStorage.getItem('categories')
+      }
   handleChange = (e) => {
     if (e.target.name === 'image'){
       this.setState({
-        [e.target.name]: e.target.files[0]
+        [e.target.name]: e.target.files[0] 
       })
-
     }else{
-  this.setState({ [e.target.name]: e.target.value });
-  }};
+      this.setState({ [e.target.name]: e.target.value });
+      
+      }};
   
-
+   listingcategories = () => {
+     categories.map((g)=>{
+      return(
+              <option value={g.category_name}>{g.category_name}</option> 
+      )
+    })
+   };
+  
   
       
 
@@ -96,57 +109,19 @@ class AddProduct extends Component {
           .catch(function (error) {
             console.log(error);
           });
+          this.props.history.goBack()
         }
-         /*   uploadFile = (file, ) => {
-            const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
-              upload.create((error, blob)=> {
-                if (error){
-                  console.log(error)
-                }else{
-                  console.log('there is no error')
-                }
-              })*/
-          
-      
-                                          
-                                          
-                                        /* this.props.context.addProduct(
-                                            {
-                                              product_name,
-                                              ref_product,
-                                              price,
-                                              shortDesc,
-                                              description,
-                                              available_quantity: available_quantity || 0
-                                              
-                                            },
-                                            () => this.setState(initState)
-                                          );
-                                          this.setState(
-                                            { flash: { status: 'is-success', msg: 'Product created successfully' }}
-                                          );
-                                          
-                                    */
-   
-                                                    /*else {
-                                                      this.setState(
-                                                        { flash: { status: 'is-danger', msg: 'Please enter name and price' }}
-                                                      );
-                                                    }
-                                                  };*/ 
-
- // handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
-
+         
   render() {
     const { product_name, ref_product, price, shortDesc, description, available_quantity  } = this.state;
-   // const { user } = this.props.context;
+   
 
     return (
      
     
       <Container fluid>
       <Row>
-        <Col md="8">
+        <Col md="10">
           <Card>
             <Card.Header>
               <Card.Title as="h4">Ajout Produit</Card.Title>
@@ -167,6 +142,25 @@ class AddProduct extends Component {
                       ></Form.Control>
                     </Form.Group>
                   </Col>
+                </Row>
+                <Row>
+
+                
+                <Col>
+                <label htmlFor="categorie">
+                        La categorie
+                      </label>
+                </Col>
+                <Col>
+                <div class="dropdown">
+                    
+                    <select class="dropbtn" >
+              <option class="dropdown-content" value=""onchange={this.handleChange}>select categorie</option>
+              
+            </select>
+                  </div>
+                  
+                </Col>
                 </Row>
                 <Row>
                   <Col className="pr-1" md="6">
@@ -281,8 +275,8 @@ class AddProduct extends Component {
 }
 const mapStateToProps = (state) => {
   return({
-      user: state.userReducer
-      
+      category: state. categoriesReducer
   })
 }
-export default withRouter(AddProduct);
+
+export default connect(mapStateToProps, { categoryAction })(AddProduct);

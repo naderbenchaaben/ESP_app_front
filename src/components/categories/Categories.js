@@ -5,6 +5,7 @@ import {url} from "config";
 import { connect } from 'react-redux'
 import { categoryAction } from '../../actions'
 import './category.scss'
+
 import {
     Badge,
     Button,
@@ -21,14 +22,17 @@ import {
   } from "react-bootstrap";
 const Categories= (props)=> {
 
-    const [ categories, setcategories] = useState([])
-   
+    const [ categories, setCategories] = useState([])
+   const [gotcat, setGotcat] = useState(0)
 
     const fetchingcategories= () =>{
         axios.get(url+"/api/v2/categories").then(
             res=>{
                 console.log(res.data)
-                setcategories(res.data)
+                setCategories(res.data)
+                setGotcat(res.data.length)
+                console.log(gotcat)
+                props.categoryAction(res.data)
                 
                 console.log(categories)
             })
@@ -37,11 +41,12 @@ const Categories= (props)=> {
     useEffect(()=>{
       
       fetchingcategories();
-    })
+    },[gotcat])
     const deletecategory= (id) =>{
       axios.delete(url+"/api/v2/categories/"+id).then(
         res=>{
           console.log(res)
+          setGotcat(gotcat -1)
         }
       )
     }

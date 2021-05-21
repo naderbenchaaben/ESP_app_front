@@ -21,19 +21,19 @@ import {
 const Products= (props)=> {
 
     const [ products, setProducts] = useState([])
-    const [ updatedproduct, setUpdatedproduct ] = useState()
-    
+    const [ gotprod, setGotprod ] = useState(0)
+    const [ updateproduct ,setUpdatedproduct ] =useState()
    
     console.log(products)
-    console.log(updatedproduct)
+   
 
     const fetchingproducts= () =>{
         axios.get(url+"/api/v2/products").then(
             res=>{
                 
                 setProducts(res.data)
-                
-                //setProducts( products => [...products, res.data]);
+                setGotprod(res.data.length)
+               
                 console.log(products)
             })
             .catch(res => console.log(res))
@@ -41,14 +41,20 @@ const Products= (props)=> {
     useEffect(()=>{
       console.log("a")
       fetchingproducts();
-    },[updatedproduct, products])
+    },[gotprod])
     const deleteproduct= (id) =>{
       axios.delete(url+"/api/v2/products/"+id).then(
         res=>{
           console.log(res)
+          setGotprod(gotprod-1)
         }
       )
     }
+    const prodtobeupdated =(p)=>{
+      localStorage.setItem('product',p.id );
+    }
+
+    
 
     const list =products.map( p =>{
       return(
@@ -83,7 +89,7 @@ const Products= (props)=> {
                   <Link to="./UpdateProduct">
                     <button
                   className="product_update_btn"
-                  onClick={()=>setUpdatedproduct( p )
+                  onClick={()=>localStorage.setItem('product', p.id )
                   }
                  // setProducts( products => [...products, res.data]);
                    > modifier</button>
@@ -107,13 +113,7 @@ return (
     <div>
            
         
-        <button
-        class="test"
-     type="submit"
-     onClick={fetchingproducts }
-      
-    
-     >refrech listes produit</button> 
+        
     
       
                   <Link to="./AddProduct">

@@ -27,6 +27,7 @@ import AddCategory from "components/categories/AddCategory.js";
 
 import UpdateProduct from "components/products/UpdateProduct.js";
 import Products from "components/products/products.js";
+import Company from "components/company/company.js";
 import Categories from "components/categories/Categories.js";
 import { Uploader } from "components/Uploader/MultiUploader";
 
@@ -123,7 +124,15 @@ const dashboardRoutes = [
     icon: "nc-icon nc-bell-55",
     component: AddCategory,
     layout: "/admin",
-  }
+  },
+  {
+    path: "/company",
+    name: "Company",
+    icon: "nc-icon nc-bell-55",
+    component: Company,
+    layout: "/admin",
+  },
+  
 
   
   

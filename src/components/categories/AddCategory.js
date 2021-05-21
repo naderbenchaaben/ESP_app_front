@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-//import withContext from "../withContext";
-import { Redirect, Link } from "react-router-dom";
+
+
 import axios from 'axios';
-import { connect } from 'react-redux'
 import {url, headers} from "config";
-import {MultiUploader } from '../Uploader/MultiUploader'
+import { withRouter } from "react-router";
+
+
+
 //import ImageUploading from 'react-images-uploading';
-import { withRouter } from 'react-router'
+
 
 
 import {
@@ -50,14 +52,13 @@ class AddCategory extends Component {
   
 
   
-      
+       
 
       handleSubmit = e => {
    
         e.preventDefault();
         
         console.log(this.state);
-        //console.log(JSON.stringify(this.state, null, 2));
         let data = JSON.stringify(this.state);
         console.log((data, null, 2));
     
@@ -75,57 +76,19 @@ class AddCategory extends Component {
         }  
           )
           .then(function (response) { 
-            console.log("category-addition", response);
-           this.props.history.push('/')
+            console.log("category-addition", response)
+            
           })
          
           .catch(function (error) {
             console.log(error);
           });
+          this.props.history.goBack()
         }
-         /*   uploadFile = (file, ) => {
-            const upload = new DirectUpload(file, url+'api/v2/rails/active_storage/direct_upload')
-              upload.create((error, blob)=> {
-                if (error){
-                  console.log(error)
-                }else{
-                  console.log('there is no error')
-                }
-              })*/
-          
-      
-                                          
-                                          
-                                        /* this.props.context.addProduct(
-                                            {
-                                              product_name,
-                                              ref_product,
-                                              price,
-                                              shortDesc,
-                                              description,
-                                              available_quantity: available_quantity || 0
-                                              
-                                            },
-                                            () => this.setState(initState)
-                                          );
-                                          this.setState(
-                                            { flash: { status: 'is-success', msg: 'Product created successfully' }}
-                                          );
-                                          
-                                    */
-   
-                                                    /*else {
-                                                      this.setState(
-                                                        { flash: { status: 'is-danger', msg: 'Please enter name and price' }}
-                                                      );
-                                                    }
-                                                  };*/ 
-
- // handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
-
+         
   render() {
     const { category_name} = this.state;
-   // const { user } = this.props.context;
+   
 
     return (
      
@@ -163,6 +126,7 @@ class AddCategory extends Component {
                 >
                   Ajouter categorie
                 </Button>
+                
                 <div className="clearfix"></div>
               </Form>
             </Card.Body>

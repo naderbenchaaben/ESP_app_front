@@ -1,4 +1,4 @@
-import { LOGIN,LOGOUT } from '../types'
+import { LOGIN,LOGOUT,FETCH_CATEGORIES,FETCH_COMPANY } from '../types'
 
 
 export const userAction = (payload, login) => {
@@ -38,6 +38,16 @@ export const categoryAction = (payload) => {
         localStorage.setItem('categories', JSON.stringify(payload) )
         dispatch({
             type: FETCH_CATEGORIES,
+            payload
+        })
+
+    }
+}
+export const companyAction = (payload) => {
+    return (dispatch) => {
+        localStorage.setItem('company', JSON.stringify(payload) )
+        dispatch({
+            type: FETCH_COMPANY,
             payload
         })
 

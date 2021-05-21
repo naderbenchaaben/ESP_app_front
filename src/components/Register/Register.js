@@ -41,20 +41,18 @@ handleChange (e) {
   goback=()=>{
    this.props.history.push('/')
   }
+  
   handleSubmit = e => {
    
     e.preventDefault();
     
     console.log(this.state);
-    //console.log(JSON.stringify(this.state, null, 2));
+   
     let data = JSON.stringify(this.state);
     console.log((data, null, 2));
 
     
-    /*axios
-      .post("http://localhost:3001/users", this.state)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));*/
+    
       const {
         email,
         password,
@@ -96,12 +94,27 @@ handleChange (e) {
       console.log("registration response ", response )
       console.log(this.state.register_test)
       console.log(response.data.status)
-      this.props.history.push('/')
       console.log(this.state.register_test)
+      
+
+            axios.post(url+"/api/v2/companies",{
+                company:{
+                  companyname: companyname,
+                  fieldofbusiness: fieldofbusiness,
+                  city: city,
+                  user_id: response.data.user.id
+                }
+              }
+            ).then( response =>{
+              console.log(response)
+            })
     }).catch(error =>{
       console.log("registration error ", error)
     })
+    
 
+    
+this.props.history.push('/')
     }
     
     render (){

@@ -38,6 +38,8 @@ class UpdateProduct extends Component {
     };
     
     console.log(localStorage.getItem("product"))
+    let prod = (localStorage.getItem("product"))
+    
     this.handleChange = this.handleChange.bind(this);  
   }
 
@@ -48,9 +50,30 @@ class UpdateProduct extends Component {
       })
 
     }else{
+      if(e.target.value){
   this.setState({ [e.target.name]: e.target.value });
+  }
   }};
-  
+
+    getproduct(prodid) {
+    axios.get(url+"/api/v2/products/"+ localStorage.getItem("product")).then(
+        res=>{
+          console.log(res)
+          this.product_name = res.data.product.product_name
+          this.ref_product = res.data.product.ref_product
+          this.price = res.data.product.price
+          this.shortDesc = res.data.product.shortDesc
+          this.description = res.data.product.description
+          this.available_quantity = res.data.product.available_quantity
+          
+
+        }
+    )
+  }
+  componentDidMount() {
+    this.getproduct()
+    console.log(this.state)
+  }
 
   
       
@@ -74,7 +97,7 @@ class UpdateProduct extends Component {
             available_quantity 
           } =  this.state;
           console.log(JSON.stringify(this.state));
-          axios.post(url+'/api/v2/products',{
+          axios.put(url+'/api/v2/products/'+localStorage.getItem("product"),{
           product:{
             product_name: product_name,
             ref_product: ref_product,
@@ -86,13 +109,15 @@ class UpdateProduct extends Component {
         }  
           )
           .then(function (response) { 
-            console.log("product-addition", response);
-           this.props.history.push('/')
+            console.log("product-update", response.data.products);
+           
           })
          
           .catch(function (error) {
             console.log(error);
           });
+          
+          this.props.history.goBack()
         }
        
 

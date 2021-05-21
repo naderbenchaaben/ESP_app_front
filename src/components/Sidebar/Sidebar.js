@@ -94,6 +94,20 @@ function Sidebar({ color, image, routes , ...rest} ) {
         </Nav>
         <Nav>
         <li
+          className={activeRoute( "/admin/company")}
+                >
+          <NavLink
+          to="/admin/company"
+          className="nav-link"
+          activeClassName="active"
+          >
+            <i className="nc-icon nc-bank" />
+            <p>Entreprise/Shop</p>
+          </NavLink>
+          </li>
+        </Nav>
+        <Nav>
+        <li
           className={activeRoute("/admin/Categories")}
                 >
           <NavLink

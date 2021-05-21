@@ -1,5 +1,10 @@
-import React from "react";
+import React, {useEffect, useState}from "react";
 import ChartistGraph from "react-chartist";
+import {url} from "config";
+import axios from 'axios'
+import { connect } from 'react-redux'
+import { categoryAction } from '../actions'
+import { companyAction } from '../actions'
 // react-bootstrap components
 import {
   Badge,
@@ -16,7 +21,36 @@ import {
   Tooltip,
 } from "react-bootstrap";
 
-function Dashboard() {
+function Dashboard(props) {
+  const [gotcat, setGotcat] = useState(0)
+  const [gotcomp, setGotcomp] = useState(0)
+
+  const fetchingcategories= () =>{
+    axios.get(url+"/api/v2/categories").then(
+        res=>{
+            console.log(res.data)
+            props.categoryAction(res.data)
+             
+                       
+        })
+        .catch(res => console.log(res))
+}
+const fetchingcompany= () =>{
+  axios.get(url+"/api/v2/companies/"+props.user.data.id).then(
+      res=>{
+          console.log(res)
+          props.companyAction(res.data)
+          console.log(props.company)
+          console.log(localStorage.getItem('company'))
+
+          
+      })
+      .catch(res => console.log(res))
+}
+useEffect(()=>{
+      fetchingcompany();
+  fetchingcategories();
+},[gotcat],[gotcomp])
   return (
     <>
       <Container fluid>
@@ -611,5 +645,11 @@ function Dashboard() {
     </>
   );
 }
-
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return({
+      category: state.categoriesReducer,
+      company: state.companyReducer,
+      user: state.userReducer
+  })
+}
+export default connect(mapStateToProps,{ categoryAction ,companyAction } ) (Dashboard);

@@ -139,7 +139,7 @@ function Sidebar({ color, image, routes , ...rest} ) {
           className={activeRoute( "/admin/Clients")}
                 >
           <NavLink
-          to="/admin/Clients"
+          to="/admin/clients"
           className="nav-link"
           activeClassName="active"
           >

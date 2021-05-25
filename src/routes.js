@@ -24,7 +24,8 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import AddProduct from "components/products/AddProduct.js";
 import AddCategory from "components/categories/AddCategory.js";
-
+import Clients from "components/clients/Clients.js"
+import Oldclients from "components/clients/Oldclients.js"
 import UpdateProduct from "components/products/UpdateProduct.js";
 import Products from "components/products/products.js";
 import Company from "components/company/company.js";
@@ -132,6 +133,20 @@ const dashboardRoutes = [
     component: Company,
     layout: "/admin",
   },
+  {
+    path: "/clients",
+    name: "Clients",
+    icon: "nc-icon nc-bell-55",
+    component: Clients,
+    layout: "/admin",
+  },
+  {
+    path: "/Oldclients",
+    name: "Oldclients",
+    icon: "nc-icon nc-bell-55",
+    component: Oldclients,
+    layout: "/admin",
+  }
   
 
   

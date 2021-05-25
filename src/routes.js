@@ -25,6 +25,7 @@ import Notifications from "views/Notifications.js";
 import AddProduct from "components/products/AddProduct.js";
 import AddCategory from "components/categories/AddCategory.js";
 import Clients from "components/clients/Clients.js"
+import Orders from "components/orders/Orders.js"
 import Oldclients from "components/clients/Oldclients.js"
 import UpdateProduct from "components/products/UpdateProduct.js";
 import Products from "components/products/products.js";
@@ -145,6 +146,13 @@ const dashboardRoutes = [
     name: "Oldclients",
     icon: "nc-icon nc-bell-55",
     component: Oldclients,
+    layout: "/admin",
+  },
+  {
+    path: "/Orders",
+    name: "Orders",
+    icon: "nc-icon nc-bell-55",
+    component: Orders,
     layout: "/admin",
   }
   

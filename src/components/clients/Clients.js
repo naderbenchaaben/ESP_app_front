@@ -29,7 +29,7 @@ const Clients= (props)=> {
    
 
     const fetchingclients= () =>{
-        axios.get(url+"/api/v2/user/"+props.user.data.city).then(
+        axios.get(url+"/api/v2/users/"+props.user.data.city).then(
             res=>{
               console.log(res)
                 

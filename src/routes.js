@@ -35,14 +35,7 @@ import { Uploader } from "components/Uploader/MultiUploader";
 
 
 const dashboardRoutes = [
- /* {
-    upgrade: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "nc-icon nc-alien-33",
-    component: Upgrade,
-    layout: "/admin",
-  },*/
+ 
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -150,7 +143,7 @@ const dashboardRoutes = [
   },
   {
     path: "/Orders",
-    name: "Orders",
+    name: "commandes",
     icon: "nc-icon nc-bell-55",
     component: Orders,
     layout: "/admin",

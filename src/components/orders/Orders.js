@@ -1,14 +1,14 @@
 import React, {useState, Fragment, useEffect}  from 'react'
 import axios from 'axios'
-import { Redirect, Link } from "react-router-dom";
-import {MultiUploader } from '../Uploader/MultiUploader'
+
+
 
 import {url} from "config";
 import { connect } from 'react-redux'
 import {
     Badge,
     Button,
-    Card,
+    
     Navbar,
     Nav,
     Table,
@@ -19,155 +19,146 @@ import {
     OverlayTrigger,
     Tooltip,
   } from "react-bootstrap";
-const Ordres= (props)=> {
+  import { makeStyles } from "@material-ui/core/styles";
+import Icon from "@material-ui/core/Icon";
+  import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import CardIcon from "components/Card/CardIcon.js";
+import CardBody from "components/Card/CardBody.js";
+import CardFooter from "components/Card/CardFooter.js";
+import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "components/Grid/GridContainer.js";
+const Orders = (props)=> {
+    const [ orders, setOrders] = useState([])
+    const [ gotord, setGotord] = useState(0)
+    
+
+    const fetchingorders= () =>{
+      axios.get(url+"/api/v2/order/"+props.company.data.id).then(
+          res=>{
+              console.log(res)
+              setOrders(res.data.order_list)
+              setGotord(res.data.length)
+             
+              console.log(orders)
+          })
+          .catch(res => console.log(res))
+        }
+        useEffect(()=>{
+          fetchingorders();
+      
+    },[gotord])
+    const stage=(o)=>{
+      switch(o){
+        case 'pending':
+          return "En attente ..."
+        case 'processing':
+          return  "en traitement ..."
+          case 'ready':
+          return  "Prète"
+          case 'completed':
+          return  "complété"
+      }
+    }
+    const stagecolor=(o)=>{
+      switch(o){
+        case 'pending':
+          return "danger"
+        case 'processing':
+          return  "warning"
+          case 'ready':
+          return  "info"
+          case 'completed':
+          return  "success"
+    }
+  }
+  const typeorder=(o)=>{
+    switch(o){
+      case 'delivery':
+        return "Livraison"
+      case 'collection':
+        return  "Collection"
+  }
+}
+ async function getclient (o){
+    let client={};
+    await axios.get(url+"/api/v2/user/"+o.user_id).then(
+      res=>{
+        console.log(res)
+        client = res.data;
+        
+      }
+      
+    )
+    console.log(client) 
+       return client ;
+      
+  }
+  
+    const list =orders.map( o =>{
+      
+      return(
+        <div key={o.id}>
+          <GridItem >
+         { console.log(getclient(o))}
+          <Card>
+            <CardHeader color={stagecolor(o.stage)} stats icon>
+              <CardIcon color={stagecolor(o.stage)}>
+              <Icon>{stage(o.stage)}</Icon>
+              </CardIcon>
+            </CardHeader>
+            <ul>
+                <li> L'id de la commande : {o.id}</li>
+                <li> Type de l'ordre:  {typeorder(o.order_type)}</li>
+                <li> client :
+
+                   <ul><li>Nom : {getclient(o).firstname} </li>
+                       <li> Prenom :</li>
+                       <li> Numero telephone : </li>
+                       <li>email : {getclient(o).email}</li>
+                    </ul>
+                    <li>Total de la commande : {o.total_price} dt </li>
+                  
+                
+                  
+                  
+                </li>
+            </ul>
+              
+            <CardFooter stats>
+              <div >
+                
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        </div>
+      )
+    })
+    
+  
 return(
   <>
-<Container fluid>
-        <Row>
-          <Col md="12">
-            <Card className="strpied-tabled-with-hover">
-              <Card.Header>
-                <Card.Title as="h4">Striped Table with Hover</Card.Title>
-                <p className="card-category">
-                  Here is a subtitle for this table
-                </p>
-              </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover table-striped">
-                  <thead>
-                    <tr>
-                      <th className="border-0">ID</th>
-                      <th className="border-0">Name</th>
-                      <th className="border-0">Salary</th>
-                      <th className="border-0">Country</th>
-                      <th className="border-0">City</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>$36,738</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Minerva Hooper</td>
-                      <td>$23,789</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Sage Rodriguez</td>
-                      <td>$56,142</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Philip Chaney</td>
-                      <td>$38,735</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Doris Greene</td>
-                      <td>$63,542</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Mason Porter</td>
-                      <td>$78,615</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md="12">
-            <Card className="card-plain table-plain-bg">
-              <Card.Header>
-                <Card.Title as="h4">Table on Plain Background</Card.Title>
-                <p className="card-category">
-                  Here is a subtitle for this table
-                </p>
-              </Card.Header>
-              <Card.Body className="table-full-width table-responsive px-0">
-                <Table className="table-hover">
-                  <thead>
-                    <tr>
-                      <th className="border-0">ID</th>
-                      <th className="border-0">Name</th>
-                      <th className="border-0">Salary</th>
-                      <th className="border-0">Country</th>
-                      <th className="border-0">City</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>$36,738</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Minerva Hooper</td>
-                      <td>$23,789</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Sage Rodriguez</td>
-                      <td>$56,142</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Philip Chaney</td>
-                      <td>$38,735</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Doris Greene</td>
-                      <td>$63,542</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Mason Porter</td>
-                      <td>$78,615</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+
+<h3>Commandes </h3>
+          <ul>{list}</ul>
+          
+   
+      
+
+     
 </>
-)
-}  
+)}
+
 
 
 const mapStateToProps = (state) => {
     return({
-        user: state.userReducer
+        user: state.userReducer,
+        company: state.companyReducer
         
     })
   }

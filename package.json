@@ -4,6 +4,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.2",
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "activestorage": "^5.2.5",
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
@@ -13,6 +14,7 @@
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "node-sass": "4.14.1",
+    "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-chartist": "0.14.3",

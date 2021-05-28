@@ -25,8 +25,8 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-const Orders = (props)=> {
-    const [ orders, setOrders] = useState([])
+const Order = (props)=> {
+    const [ order, setOrder] = useState([])
     const [ gotord, setGotord] = useState(0)
     
 
@@ -157,4 +157,4 @@ const mapStateToProps = (state) => {
         
     })
   }
-export default connect(mapStateToProps) (Orders);
+export default connect(mapStateToProps) (Order);

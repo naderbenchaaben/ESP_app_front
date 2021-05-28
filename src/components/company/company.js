@@ -56,10 +56,10 @@ const Company=(props)=>{
                   </div>
                 </Row>
                 <div className="text-center">
-                  <h3>
+                  <h2>
                  {props.company.data.companyname}
                     
-                  </h3>
+                  </h2>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin mr-2" />
                       Entreprise/shop : {props.company.data.companyname}

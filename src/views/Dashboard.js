@@ -24,6 +24,8 @@ import {
 function Dashboard(props) {
   const [gotcat, setGotcat] = useState(0)
   const [gotcomp, setGotcomp] = useState(0)
+  const [ orders, setOrders] = useState([])
+    const [ gotord, setGotord] = useState(0)
 
   const fetchingcategories= () =>{
     axios.get(url+"/api/v2/categories").then(
@@ -47,10 +49,63 @@ const fetchingcompany= () =>{
       })
       .catch(res => console.log(res))
 }
+const fetchingorders= () =>{
+  axios.get(url+"/api/v2/order/"+props.company.data.id).then(
+      res=>{
+          console.log(res)
+          setOrders(res.data.order_list)
+          setGotord(res.data.length)
+         
+          console.log(orders)
+      })
+      .catch(res => console.log(res))
+    }
 useEffect(()=>{
       fetchingcompany();
   fetchingcategories();
-},[gotcat],[gotcomp])
+  fetchingorders();
+},[gotcat],[gotcomp],[orders])
+const countpending=()=>{
+  var x = 0;
+  var i;
+  for (i=0;i<orders.length;i++){
+    if (orders[i].stage == "pending")
+    x+=1;
+  }
+  return x;
+}
+const countprocessing=()=>{
+  var x = 0;
+  var i;
+  for (i=0;i<orders.length;i++){
+    if (orders[i].stage == "processing")
+    x+=1;
+  }
+  return x;
+}
+const countready=()=>{
+  var x = 0;
+  var i;
+  for (i=0;i<orders.length;i++){
+    if (orders[i].stage == "ready")
+    x+=1;
+  }
+  return x;
+}
+const countcomptete=()=>{
+  var x = 0;
+  var i;
+  for (i=0;i<orders.length;i++){
+    if (orders[i].stage == "completed")
+    x+=1;
+  }
+  return x;
+}
+const pspending=()=>{
+  var x;
+ 
+  return (countpending/(orders.length))*100
+}
   return (
     <>
       <Container fluid>
@@ -66,8 +121,8 @@ useEffect(()=>{
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Les ordres Active</p>
-                      <Card.Title as="h4">5</Card.Title>
+                      <p >Les commandes Actives</p>
+                      <Card.Title as="h4">{orders.length}</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -81,6 +136,145 @@ useEffect(()=>{
               </Card.Footer>
             </Card>
   </Col>
+
+  <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-light-3 text-success"></i>
+                    </div>
+                  </Col>
+                  <Col xs="7">
+                    <div className="numbers">
+                      <p >Les commande en attente</p>
+                      <Card.Title as="h4">{countpending()}</Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer>
+                <hr></hr>
+                <div className="stats">
+                  <i className="fas fa-redo mr-1"></i>
+                  Mettre à
+                </div>
+              </Card.Footer>
+            </Card>
+  </Col>
+  <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-light-3 text-success"></i>
+                    </div>
+                  </Col>
+                  <Col xs="7">
+                    <div className="numbers">
+                      <p >Les commandes en traitement</p>
+                      <Card.Title as="h4">{countprocessing()}</Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer>
+                <hr></hr>
+                <div className="stats">
+                  <i className="fas fa-redo mr-1"></i>
+                  Mettre à
+                </div>
+              </Card.Footer>
+            </Card>
+  </Col>
+  <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-light-3 text-success"></i>
+                    </div>
+                  </Col>
+                  <Col xs="7">
+                    <div className="numbers">
+                      <p >Les commandes prètes</p>
+                      <Card.Title as="h4">{countready()}</Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer>
+                <hr></hr>
+                <div className="stats">
+                  <i className="fas fa-redo mr-1"></i>
+                  Mettre à
+                </div>
+              </Card.Footer>
+            </Card>
+  </Col>
+  <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-light-3 text-success"></i>
+                    </div>
+                  </Col>
+                  <Col xs="7">
+                    <div className="numbers">
+                      <p >les commandes complétées</p>
+                      <Card.Title as="h4">{countcomptete()}</Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer>
+                <hr></hr>
+                <div className="stats">
+                  <i className="fas fa-redo mr-1"></i>
+                  Mettre à
+                </div>
+              </Card.Footer>
+            </Card>
+  </Col>
+  <Col>
+  <Row>
+    
+  <Card>
+              <Card.Header>
+                <Card.Title as="h4"> Statistique des Commande </Card.Title>
+                <p className="card-category"></p>
+              </Card.Header>
+              <Card.Body>
+                <div
+                  className="ct-chart ct-perfect-fourth"
+                  id="chartPreferences"
+                >
+                  <ChartistGraph
+                    data={{
+                      labels: ["40%", "20%", "40%"],
+                      series: [70, 20, 10],
+                    }}
+                    type="Pie"
+                  />
+                </div>
+                <div className="legend">
+                  <i className="fas fa-circle text-info"></i>
+                  en attente <i className="fas fa-circle text-danger"></i>
+                 en traitement <i className="fas fa-circle text-warning"></i>
+                  prete
+                </div>
+                <hr></hr>
+                <div className="stats">
+                  <i className="far fa-clock"></i>
+                  
+                </div>
+              </Card.Body>
+                  </Card></Row></Col>
           {/*<Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>

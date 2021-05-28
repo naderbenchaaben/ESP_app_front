@@ -1,8 +1,5 @@
 import React, {useState, Fragment, useEffect}  from 'react'
 import axios from 'axios'
-
-
-
 import {url} from "config";
 import { connect } from 'react-redux'
 import {
@@ -129,7 +126,10 @@ const Orders = (props)=> {
               <div >
                 
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  
+                <button
+  className="product_add_btn"
+  
+   > detail commande </button>
                 </a>
               </div>
             </CardFooter>

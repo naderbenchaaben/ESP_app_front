@@ -30,7 +30,7 @@ class Login extends Component {
       
         email: null,
         password: null,
-        error: '',
+        error: ''
        
     };
     this.handleChange = this.handleChange.bind(this);  

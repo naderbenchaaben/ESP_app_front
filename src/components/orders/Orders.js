@@ -2,6 +2,7 @@ import React, {useState, Fragment, useEffect}  from 'react'
 import axios from 'axios'
 import {url} from "config";
 import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
 import {
     Badge,
     Button,
@@ -45,6 +46,54 @@ const Orders = (props)=> {
           fetchingorders();
       
     },[gotord])
+    
+    function getdaydate ( ) {
+      const today = new Date()
+      const date = new Date(today)
+      
+      date.setDate(date.getDate() )
+      
+      return date;
+      
+    }
+    const countpending=()=>{
+      var x = 0;
+      var i;
+      for (i=0;i<orders.length;i++){
+        if (orders[i].stage == "pending")
+        x+=1;
+      }
+      return x;
+    }
+    const countprocessing=()=>{
+      var x = 0;
+      var i;
+      for (i=0;i<orders.length;i++){
+        if (orders[i].stage == "processing")
+        x+=1;
+      }
+      return x;
+    }
+    const countready=()=>{
+      var x = 0;
+      var i;
+      for (i=0;i<orders.length;i++){
+        if (orders[i].stage == "ready")
+        x+=1;
+      }
+      return x;
+    }
+    const countcompleted=()=>{
+      var x = 0;
+      var i;
+      var today = new Date()
+         today = getdaydate().toISOString().slice(0, 10)
+      for (i=0;i<orders.length;i++){
+        if (orders[i].stage == "completed"  && (orders[i].created_at).slice(0,10) == today)
+        x+=1;
+      }
+      return x;
+    }
     const stage=(o)=>{
       switch(o){
         case 'pending':
@@ -81,70 +130,132 @@ const Orders = (props)=> {
     let client={};
     await axios.get(url+"/api/v2/user/"+o.user_id).then(
       res=>{
-        console.log(res)
+        
         client = res.data;
         
       }
       
     )
-    console.log(client) 
+    
        return client ;
       
   }
-  
-    const list =orders.map( o =>{
-      
-      return(
-        <div key={o.id}>
-          <GridItem >
-         { console.log(getclient(o))}
+return(
+  <>
+
+<h3>Commandes </h3>
+<div>
+<GridItem >
           <Card>
-            <CardHeader color={stagecolor(o.stage)} stats icon>
-              <CardIcon color={stagecolor(o.stage)}>
-              <Icon>{stage(o.stage)}</Icon>
+            <CardHeader color="danger" stats icon>
+              <CardIcon color="danger">
+              <Icon>en attente ...</Icon>
               </CardIcon>
             </CardHeader>
-            <ul>
-                <li> L'id de la commande : {o.id}</li>
-                <li> Type de l'ordre:  {typeorder(o.order_type)}</li>
-                <li> client :
-
-                   <ul><li>Nom : {getclient(o).firstname} </li>
-                       <li> Prenom :</li>
-                       <li> Numero telephone : </li>
-                       <li>email : {getclient(o).email}</li>
-                    </ul>
-                    <li>Total de la commande : {o.total_price} dt </li>
-                  
-                
-                  
-                  
-                </li>
-            </ul>
-              
+            
+            <h2 style={{paddingLeft: 100}}><b>{countpending()}</b></h2>
             <CardFooter stats>
               <div >
                 
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                <button
-  className="product_add_btn"
+                <Link to="./Pending">
   
-   > detail commande </button>
+                    <button
+                  className="product_add_btn"
+                  
+                   > Commandes en attentes</button>
+                  </Link>
                 </a>
               </div>
             </CardFooter>
           </Card>
         </GridItem>
         </div>
-      )
-    })
-    
+        <div>
+        <GridItem >
+        
+          <Card>
+            <CardHeader color="warning" stats icon>
+              <CardIcon color="warning">
+              <Icon>en traitement ...</Icon>
+              </CardIcon>
+            </CardHeader>
+            <h2 style={{paddingLeft: 100}}><b>{countprocessing()}</b></h2>
+              
+            <CardFooter stats>
+              <div >
+                
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                <Link to="./Processing">
   
-return(
-  <>
+                    <button
+                  className="product_add_btn"
+                  
+                   > Commandes en traitement</button>
+                  </Link>
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+             </div>
+             <div>
+        <GridItem >
+        
+          <Card>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
+              <Icon>prète</Icon>
+              </CardIcon>
+            </CardHeader>
+            
+            <h2 style={{paddingLeft: 100}}><b>{countready()}</b></h2>
+            <CardFooter stats>
+              <div >
+                
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                <Link to="./Ready">
+  
+                  <button
+                className="product_add_btn"
 
-<h3>Commandes </h3>
-          <ul>{list}</ul>    
+                > Commandes pretes</button>
+                </Link>
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+             </div>
+             <div>
+        <GridItem >
+        
+          <Card>
+            <CardHeader color="success" stats icon>
+              <CardIcon color="success">
+              <Icon>compeletés</Icon>
+              </CardIcon>
+            </CardHeader>
+    
+            
+            <h2 style={{paddingLeft: 100}}><b>{countcompleted()}</b></h2>
+            <CardFooter stats>
+              <div >
+                
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                <Link to="./Completed">
+  
+                    <button
+                  className="product_add_btn"
+                  
+                   > Commandes Completées</button>
+                  </Link>
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+             </div>
 </>
 )}
 

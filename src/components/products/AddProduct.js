@@ -37,8 +37,8 @@ class AddProduct extends Component {
       description: "",
       available_quantity: "",
       category: "",
-      categories:[]
-      
+      categories:[],
+      error: ''
 
     };
     this.handleChange = this.handleChange.bind(this);  
@@ -73,31 +73,34 @@ class AddProduct extends Component {
       handleSubmit = e => {
    
         e.preventDefault();
-        
+        const {
+            product_name,
+            ref_product,
+            price,
+            description, 
+            available_quantity ,
+            error
+          } =  this.state;
+
+        if(!product_name || !ref_product || !price || !description || !available_quantity ){ this.setState({ error: 'veuillez remplire tous les champs' }) }
         console.log(this.state);
-        //console.log(JSON.stringify(this.state, null, 2));
+        
         let data = JSON.stringify(this.state);
         console.log((data, null, 2));
     
         
     
-          const {
-            product_name,
-            ref_product,
-            price,
-            shortDesc,
-            description, 
-            available_quantity 
-          } =  this.state;
+          
           console.log(JSON.stringify(this.state));
+          if ( product_name && ref_product && price && description && available_quantity){
           axios.post(url+'/api/v2/products',{
           product:{
             product_name: product_name,
             ref_product: ref_product,
             price: price,
             description: description,
-            available_quantity: available_quantity,
-            shortDesc:shortDesc
+            available_quantity: available_quantity
+           
           }
         }  
           )
@@ -111,9 +114,9 @@ class AddProduct extends Component {
           });
           this.props.history.goBack()
         }
-         
+      }
   render() {
-    const { product_name, ref_product, price, shortDesc, description, available_quantity  } = this.state;
+    const { product_name, ref_product, price, description, available_quantity  } = this.state;
    
 
     return (
@@ -128,6 +131,7 @@ class AddProduct extends Component {
             </Card.Header>
             <Card.Body>
               <Form>
+              <p > {this.state.error} </p> 
                 <Row>
                   <Col className="pl-1" md="6">
                     <Form.Group>
@@ -205,18 +209,7 @@ class AddProduct extends Component {
                     </Form.Group>
                      </Col>
                      
-                  <Col md="12">
-                    <Form.Group>
-                      <label> Bref description</label>
-                      
-                      <Form.Control
-                        name="shortDesc "
-                        placeholder="description bref"
-                        onChange={this.handleChange}
-                        type="text"
-                      ></Form.Control>
-                    </Form.Group>
-                  </Col>
+                  
                 </Row>
                 <Row>
                   <Col className="pr-1" md="12">

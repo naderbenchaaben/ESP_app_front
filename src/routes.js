@@ -26,26 +26,32 @@ import AddProduct from "components/products/AddProduct.js";
 import AddCategory from "components/categories/AddCategory.js";
 import Clients from "components/clients/Clients.js"
 import Orders from "components/orders/Orders.js"
+import Pending from "components/orders/Pending"
+import Processing from "components/orders/Processing"
+import Order from "components/orders/Order"
+import Ready from "components/orders/Ready"
+import Completed from "components/orders/Completed"
 import Oldclients from "components/clients/Oldclients.js"
 import UpdateProduct from "components/products/UpdateProduct.js";
 import Products from "components/products/products.js";
 import Company from "components/company/company.js";
 import Categories from "components/categories/Categories.js";
-import { Uploader } from "components/Uploader/MultiUploader";
+import Updatecategory from "components/categories/Updatecategory";
+
 
 
 const dashboardRoutes = [
  
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Tableau de bord",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
     layout: "/admin",
   },
   {
     path: "/userprofile",
-    name: "user profile",
+    name: " profile",
     icon: "nc-icon nc-circle-09",
     component: UserProfile,
     layout: "/admin",
@@ -87,7 +93,7 @@ const dashboardRoutes = [
   },
   {
     path: "/AddProduct",
-    name: "AddProduct",
+    name: "Ajout produit",
     icon: "nc-icon nc-bell-55",
     component: AddProduct,
     layout: "/admin",
@@ -101,7 +107,7 @@ const dashboardRoutes = [
   },
   {
     path: "/UpdateProduct",
-    name: "UpdateProducts",
+    name: "Modifier produit",
     icon: "nc-icon nc-bell-55",
     component: UpdateProduct,
     layout: "/admin",
@@ -115,14 +121,21 @@ const dashboardRoutes = [
   },
   {
     path: "/AddCategory",
-    name: "AddCategory",
+    name: "Ajout category",
     icon: "nc-icon nc-bell-55",
     component: AddCategory,
     layout: "/admin",
   },
   {
+    path: "/Updatecategory",
+    name: "Modifier categorie",
+    icon: "nc-icon nc-bell-55",
+    component: Updatecategory,
+    layout: "/admin",
+  },
+  {
     path: "/company",
-    name: "Company",
+    name: "Entreprise",
     icon: "nc-icon nc-bell-55",
     component: Company,
     layout: "/admin",
@@ -136,7 +149,7 @@ const dashboardRoutes = [
   },
   {
     path: "/Oldclients",
-    name: "Oldclients",
+    name: "anciens clients ",
     icon: "nc-icon nc-bell-55",
     component: Oldclients,
     layout: "/admin",
@@ -146,6 +159,40 @@ const dashboardRoutes = [
     name: "commandes",
     icon: "nc-icon nc-bell-55",
     component: Orders,
+    layout: "/admin",
+  },{
+    path: "/Pending",
+    name: "commandes en attente",
+    icon: "nc-icon nc-bell-55",
+    component: Pending,
+    layout: "/admin",
+  },
+  {
+    path: "/Processing",
+    name: "commandes en traitement",
+    icon: "nc-icon nc-bell-55",
+    component: Processing,
+    layout: "/admin",
+  },
+  {
+    path: "/Ready",
+    name: "commandes pretes",
+    icon: "nc-icon nc-bell-55",
+    component: Ready,
+    layout: "/admin",
+  },
+   {
+    path: "/Completed",
+    name: "commandes Completées",
+    icon: "nc-icon nc-bell-55",
+    component: Completed,
+    layout: "/admin",
+  },
+  {
+    path: "/Order",
+    name: "Commande",
+    icon: "nc-icon nc-bell-55",
+    component: Order,
     layout: "/admin",
   }
   

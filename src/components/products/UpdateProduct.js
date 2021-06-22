@@ -29,8 +29,7 @@ class UpdateProduct extends Component {
     this.state = {
       product_name: "",
       ref_product:"",
-      price: "",
-      shortDesc: "",  
+      price: "",  
       description: "",
       available_quantity: "",
       
@@ -39,6 +38,15 @@ class UpdateProduct extends Component {
     
     console.log(localStorage.getItem("product"))
     let prod = (localStorage.getItem("product"))
+    console.log(this.state)
+    this.setState({
+      product_name: JSON.parse(localStorage.getItem('product')).product_name,
+    ref_product: JSON.parse(localStorage.getItem('product')).ref_product,
+    price: JSON.parse(localStorage.getItem('product')).price,  
+    description: JSON.parse(localStorage.getItem('product')).description,
+    available_quantity: JSON.parse(localStorage.getItem('product')).available_quantity,
+  })
+  console.log(this.state)
     
     this.handleChange = this.handleChange.bind(this);  
   }
@@ -55,24 +63,9 @@ class UpdateProduct extends Component {
   }
   }};
 
-    getproduct(prodid) {
-    axios.get(url+"/api/v2/products/"+ localStorage.getItem("product")).then(
-        res=>{
-          console.log(res)
-          this.product_name = res.data.product.product_name
-          this.ref_product = res.data.product.ref_product
-          this.price = res.data.product.price
-          this.shortDesc = res.data.product.shortDesc
-          this.description = res.data.product.description
-          this.available_quantity = res.data.product.available_quantity
-          
-
-        }
-    )
-  }
+   
   componentDidMount() {
-    this.getproduct()
-    console.log(this.state)
+    
   }
 
   
@@ -92,19 +85,19 @@ class UpdateProduct extends Component {
             product_name,
             ref_product,
             price,
-            shortDesc,
             description, 
             available_quantity 
           } =  this.state;
+          
           console.log(JSON.stringify(this.state));
-          axios.put(url+'/api/v2/products/'+localStorage.getItem("product"),{
+          axios.put(url+'/api/v2/products/'+JSON.parse(localStorage.getItem('product')).id,{
           product:{
             product_name: product_name,
             ref_product: ref_product,
             price: price,
             description: description,
             available_quantity: available_quantity,
-            shortDesc:shortDesc
+            
           }
         }  
           )
@@ -122,7 +115,7 @@ class UpdateProduct extends Component {
        
 
   render() {
-    const { product_name, ref_product, price, shortDesc, description, available_quantity  } = this.state;
+    const { product_name, ref_product, price, description, available_quantity  } = this.state;
   
 
     return (
@@ -145,7 +138,7 @@ class UpdateProduct extends Component {
                       </label>
                       <Form.Control
                         name="product_name"
-                        placeholder="name of the product"
+                        placeholder={JSON.parse(localStorage.getItem('product')).product_name}
                         onChange={this.handleChange}
                         type="text"
                       ></Form.Control>
@@ -160,7 +153,7 @@ class UpdateProduct extends Component {
                       
                       <Form.Control
                         name="ref_product"
-                        placeholder="ref_product"
+                        placeholder={JSON.parse(localStorage.getItem('product')).ref_product}
                         onChange={this.handleChange}
                         type="text"
                       ></Form.Control>
@@ -174,7 +167,7 @@ class UpdateProduct extends Component {
                       
                       <Form.Control
                         name="price"
-                        placeholder="le prix du produit"
+                        placeholder={JSON.parse(localStorage.getItem('product')).price}
                         onChange={this.handleChange}
                         type="number"
                         required
@@ -188,25 +181,14 @@ class UpdateProduct extends Component {
                       <label>Available in Stock:</label>
                       <Form.Control
                         name="available_quantity"
-                        placeholder="quantité, en stock"
+                        placeholder={JSON.parse(localStorage.getItem('product')).available_quantity}
                         onChange={this.handleChange}
                         type="text"
                       ></Form.Control>
                     </Form.Group>
                      </Col>
                      
-                  <Col md="12">
-                    <Form.Group>
-                      <label> Bref description</label>
-                      
-                      <Form.Control
-                        name="shortDesc "
-                        placeholder="description bref"
-                        onChange={this.handleChange}
-                        type="text"
-                      ></Form.Control>
-                    </Form.Group>
-                  </Col>
+                
                 </Row>
                 <Row>
                   <Col className="pr-1" md="12">
@@ -217,7 +199,7 @@ class UpdateProduct extends Component {
                       as="textarea"
                        rows={3}
                         name="description"
-                        placeholder="description du produit"
+                        placeholder={JSON.parse(localStorage.getItem('product')).description}
                         onChange={this.handleChange}
                         type="text"
                       ></Form.Control>
@@ -242,14 +224,14 @@ class UpdateProduct extends Component {
                
 
                </Row> 
-                <Button
-                  className="btn-fill pull-right"
+                <button
+                  className="product_update_btn"
                   type="submit"
                   variant="info"
                   onClick={this.handleSubmit}
                 >
                   Modifer 
-                </Button>
+                </button>
                 <div className="clearfix"></div>
               </Form>
             </Card.Body>

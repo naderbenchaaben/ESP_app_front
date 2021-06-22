@@ -78,7 +78,7 @@ function Header(props) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav mr-auto" navbar>
             
-            <Dropdown as={Nav.Item}>
+           {/* <Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 as={Nav.Link}
                 data-toggle="dropdown"
@@ -97,7 +97,7 @@ function Header(props) {
                 >
                   Notification 1
                 </Dropdown.Item>
-               {/* <Dropdown.Item
+                <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
                 >
@@ -114,7 +114,7 @@ function Header(props) {
                   onClick={(e) => e.preventDefault()}
                 >
                   Notification 4
-                </Dropdown.Item>*/}
+                </Dropdown.Item>
                 <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
@@ -132,10 +132,10 @@ function Header(props) {
                 <i className="nc-icon nc-zoom-split"></i>
                 <span className="d-lg-block"> Search</span>
               </Nav.Link>
-            </Nav.Item>
+            </Nav.Item>*/}
           </Nav>
           <Nav className="ml-auto" navbar>
-            <Nav.Item>
+            {/*<Nav.Item>
               <Nav.Link
                 className="m-0"
                 href="#pablo"
@@ -143,7 +143,7 @@ function Header(props) {
               >
                 <span className="no-icon">Account</span>
               </Nav.Link>
-            </Nav.Item>
+            </Nav.Item>*/}
             { /*<Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 aria-expanded={false}
@@ -196,7 +196,7 @@ function Header(props) {
                 onClick={hundleLogout}
                 
               >
-                <span className="no-icon">Log out</span>
+                <span className="no-icon">Se déconnecter</span>
                {/* !props.user.login ? <Redirect to="/Login" /> :'' */ }   
               </Nav.Link>
             </Nav.Item>

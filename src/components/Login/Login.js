@@ -7,10 +7,11 @@ import axios from 'axios';
 import { url } from 'config'
 import imageform from '../../assets/login-form.svg'
 import imgBackground from'../../assets/login-bg.svg'
-import imgPerson from '../../assets/login-person.svg'
 import screen1 from '../../assets/login-screen1.svg'
 import screen2 from '../../assets/login-screen2.svg'
 import screen3 from '../../assets/login-screen3.svg'
+import image1 from '../../assets/image1.jpg'
+import currency_dollar_blue from '../../assets/currency_dollar_blue.jpg'
 import imgIcons from '../../assets/login-icons.svg'
 import {
   Badge,
@@ -30,7 +31,8 @@ class Login extends Component {
       
         email: null,
         password: null,
-        error: ''
+        error: '',
+        echec: ''
        
     };
     this.handleChange = this.handleChange.bind(this);  
@@ -45,9 +47,9 @@ handleChange (e) {
     if(!email){ this.setState({ error: 'veuillez saisir votre email' }) }
     if(!password){ this.setState({ error: 'veuillez saisir votre mot de passe' }) }
     if(!email && !password){ this.setState({ error: 'veuillez saisir votre email et mot de passe' }) }
-    
+    console.log(this.state.error)
     console.log(this.state);
-    //console.log(JSON.stringify(this.state, null, 2));
+   
     let data = JSON.stringify(this.state);
     console.log((data, null, 2));
 
@@ -59,7 +61,6 @@ handleChange (e) {
       
       
 
-    // Entrez un mdp >= 6 caracteres
     // Il faut mentionner que le mot de passe minimum 6 caracteres avant d'envoyer au serveur ;) 
     axios.post(url +"/api/v1/sessions", {
      user:{
@@ -78,13 +79,20 @@ handleChange (e) {
           console.log(this.props.user.data)
           
             console.log(localStorage.getItem("user"))
+            
           
+              
           //console.log(res.data.user)
-        }
+        }if(!email){ this.setState({ error: 'veuillez saisir votre email' }) }
+        if(!password){ this.setState({ error: 'veuillez saisir votre mot de passe' }) }
+        else {this.setState({ error: 'email ou mot de passe incorrect' })}
         }).catch(error =>{
           console.log("Login error ", error)
+          this.setState({ echec: ' * la connexion a échoué veuillez réessayer' }) 
         })
-
+        if( password && email ) {
+          
+          this.setState({ error: '' })}
     }
     render (){
         
@@ -94,36 +102,39 @@ handleChange (e) {
 
                 <div className="left">
                     <img className="background" src={imgBackground} alt="imgBackground"/>
-                    <img className="person" src={imgPerson} alt="imgPerson"/>
-                    <img className="screen1" src={screen1} alt="screen1"/>
-                    <img className="screen2" src={screen2} alt="screen2"/>
-                    <img className="screen3" src={screen3} alt="screen3"/>
+                    
+                    
+                   
+                    <img className="screen2" src={image1} />
+                    <img className="screen33" src={currency_dollar_blue}/>
                     <img className="icons" src={imgIcons} alt="imgIcons"/>
                 </div>
                 <div className="wrapper">
                     <img src={imageform} alt="imageform"/>
                     <form onSubmit={this.handleSubmit}>
-                        <h2>connexion admin</h2>
+                        <h2>Connexion Admin d'Entreprise</h2>
 
-                        <p className="error"> {this.error} </p> 
+                        
                         <br/>
-                        <label style={{ top: '30px' }} htmlFor="Email">Email</label>
+                        <label style={{ top: '50px' }} htmlFor="Email">Email</label>
                         <br/>
                         <input onChange={this.handleChange} name="email" id="email" type="text"/>
                         <br/>
-                        <label style={{ top: '100px' }} className="password" htmlFor="password">Password</label>
+                        <label style={{ top: '135px' }} className="password" htmlFor="password">Password</label>
                         <br/>
                         <input onChange={this.handleChange} name="password" id="password" type="password"/>
-                        
+                          
                         <button
                         class= "test"
                          type="submit"
                          onClick={this.handleSubmit}
-                         >Login</button> 
-                        
-                       
-                    </form>
+                         >Se connecter</button> <p className="echec" > {this.state.echec} </p>
+                        <p className="errorl" > {this.state.error} </p> 
+                      
+                    </form><br/>
+                    
                     <div className="a">
+                      
                    <Link
                     to="/Register"
                     >Créer un compte

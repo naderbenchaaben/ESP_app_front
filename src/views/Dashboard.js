@@ -36,9 +36,9 @@ function Dashboard(props) {
     function getdaydate ( a ) {
       const today = new Date()
       const date = new Date(today)
-      console.log(today)
+      
       date.setDate(date.getDate()- a )
-      console.log(date)
+      
       return date;
       
     }
@@ -88,7 +88,7 @@ function Dashboard(props) {
       sum+= o.total_price 
     }
   })
-      console.log(sum)
+      
       return sum;
     }
     function countordersperday(a){
@@ -133,7 +133,7 @@ function Dashboard(props) {
         labels: [formatdate(6), formatdate(5), formatdate(4), formatdate(3), formatdate(2),formatdate(1),formatdate(0)],
         datasets: [
           {
-            labels: 'nombre de commandes par jour ',
+            label: 'nombre de commandes par jour ',
             data:[countordersperday(6),countordersperday(5),countordersperday(4),countordersperday(3),countordersperday(2),countordersperday(1),countordersperday(0)],
             backgroudColor: 'rgba(75,192,192,1)',
             borderColor: 'rgba(0,0,0,1)',
@@ -157,7 +157,7 @@ function Dashboard(props) {
         labels: [formatdate(6), formatdate(5), formatdate(4), formatdate(3), formatdate(2),formatdate(1),formatdate(0)],
         datasets: [
           {
-            label: 'Revenu par jour',
+            label: 'Revenu par jour pour les commandes complétées',
             backgroundColor: 'rgba(75,192,192,1)',
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 2,
@@ -180,7 +180,7 @@ function Dashboard(props) {
         })
         .catch(res => console.log(res))
 }
-const fetchingcompany= () =>{
+function fetchingcompany (){
   axios.get(url+"/api/v2/companies/"+props.user.data.id).then(
       res=>{
           console.log(res)
@@ -203,7 +203,7 @@ const fetchingcompany= () =>{
       })
       .catch(res => console.log(res))
     }*/
-    const fetchingorders= () =>{
+    function fetchingorders () {
       if(props.company.data === undefined){
         axios.get(url+"/api/v2/order/"+parseInt(props.company["company"][6])
         ).then(
@@ -230,15 +230,13 @@ const fetchingcompany= () =>{
         }
        
 useEffect(()=>{
-  chart();
-  bar();
-  
  
   fetchingcompany();
-  fetchingcategories();
+ fetchingcategories();
   fetchingorders();
-  
-},[gotcat],[gotcomp],[datap])
+  chart();
+  bar();
+},[gotcomp,gotcat,datap,gotord])
 
 function totalincome (){
  var sum = 0;

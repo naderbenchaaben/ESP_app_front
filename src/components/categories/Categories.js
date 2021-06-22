@@ -65,7 +65,19 @@ const Categories= (props)=> {
                   </div>
                 </Col>
                 <Col>
+                <span>
+                  
+                <Link to="./Updatecategory">
+                    <button
+                  className="product_update_btn"
+                  onClick={()=>{localStorage.setItem('categorytoupdate', JSON.stringify(p) )}
+                  
+                  
+                  }
                 
+                   > modifier</button>
+                  </Link>
+                </span>
                 <span>
                   
                   <button
@@ -74,6 +86,8 @@ const Categories= (props)=> {
                         >supprimer
                   </button>
                 </span>
+                
+                 
                  
                   
                 

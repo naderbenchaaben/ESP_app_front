@@ -66,19 +66,20 @@ const Products= (props)=> {
                 
                   <div className="numbers">
                     
-                    <Card.Title as="h4">{p.product_name}</Card.Title>
+                    <Card.Title as="h3">{p.product_name}</Card.Title>
                   </div>
                 </Row></Col><br/><Col><Row>
                 
                   <br/>
                   <div >
-                    <p>Référence : {p.ref_product} </p>
-                    <p>Quantité en stock : {p.available_quantity} </p>
-                    <p> Prix: {p.price} DT </p>
-                    <p> description bref: {p.shortDesc} </p>
-                    <p> Description: {p.description} </p>
+                    <p><b>Référence : {p.ref_product}</b> </p>
+                    <p><b>Quantité en stock : {p.available_quantity} </b></p>
+                    <p> <b>Prix: {p.price} DT</b> </p>
+                    <p><b> description bref: {p.shortDesc}</b> </p>
+                    <p><b> Description: {p.description}</b> </p>
                     
                   </div>
+                  
                 
                 
               </Row></Col>
@@ -89,9 +90,9 @@ const Products= (props)=> {
                   <Link to="./UpdateProduct">
                     <button
                   className="product_update_btn"
-                  onClick={()=>localStorage.setItem('product', p.id )
+                  onClick={()=>localStorage.setItem('product', JSON.stringify(p) )
                   }
-                 // setProducts( products => [...products, res.data]);
+                 
                    > modifier</button>
                   </Link>
                 <button
@@ -100,6 +101,16 @@ const Products= (props)=> {
                       >supprimer
                 </button>
               </span>
+
+                  <Link to="./UpdateProduct">
+                    <button
+                  className="commentaires"
+                  onClick={()=>localStorage.setItem('product', JSON.stringify(p) )
+                  }
+                 
+                   > 
+                   Commentaires</button>
+                  </Link>
             </Card.Footer>
           </Card>
           

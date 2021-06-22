@@ -2,8 +2,8 @@
 
     .wrapper {
         background-color: white;
-        width: 350px;
-        height:1000px;
+        width: 600px;
+        height:1400px;
         border-radius: 15px;
         box-shadow: 0px 2px 0px lightgray;
         position: absolute;
@@ -17,14 +17,20 @@
             position: absolute;
         }
 
-        .error {
+        .errorr {
             color: #c83737;
+           
+        }
+        .error {
+            
+            margin:5px 0 ;
             position: absolute;
-            top: 13px;
+            top: 960px;   
+            
         }
 
         form {
-            margin-top: -116px;
+            margin-top: 5px;
             margin-left: 25px;
             margin-right: 25px;
             position: relative;
@@ -74,53 +80,53 @@
         }
 
         #email {
-            top: 50px;
+            top: 70px;
         }
         #password {
-            top: 120px;
+            top: 160px;
         }   
         #password-confirmation {
-            top: 190px;
+            top: 245px;
             
         }
         #lastname {
-            top: 260px;
-        }
-        #firstname {
             top: 330px;
         }
+        #firstname {
+            top: 420px;
+        }
         #telnum {
-            top: 400px;
+            top: 508px;
         }
         #companyname {
-            top: 470px;
+            top: 595px;
         }
         #fieldofbusiness {
-            top: 540px;
+            top: 680px;
         }
         #city {
-            top: 610px;
+            top: 765px;
         }
 
 
         button {
-            width: 260px;
-            font-size: 16px;
-            background-image: linear-gradient(#5daafd, #4bcffa);
+            width: 450px;
+            font-size: 20px;
+            background-image: linear-gradient(#683db8, #4bcffa);
             border: none;
             color: white;
-            padding: 7px;
+            padding: 7px    ;
             border-radius: 3px;
             box-shadow: 0px 3px 20px lightgrey;
             transition: 0.5s;
             position: absolute;
-            top: 670px;
-            animation: button 1.5s ease-in;
+            top: 1190px;
+            animation: button 1s ease-in;
         }
         button.backb{
-            width: 260px;
-            font-size: 16px;
-            background-image: linear-gradient(#5daafd, #4bcffa);
+            width: 450px;
+            font-size: 20px;
+            background-image: linear-gradient(#683db8, #4bcffa);
             border: none;
             color: white;
             padding: 7px;
@@ -128,8 +134,8 @@
             box-shadow: 0px 3px 20px lightgrey;
             transition: 0.5s;
             position: absolute;
-            top: 720px;
-            animation: button 1.5s ease-in;
+            top: 1240px;
+            animation: button 1s ease-in;
         }
 
         @keyframes button {
@@ -199,6 +205,7 @@
             z-index: 2;
             height: 15%;
             position: fixed;
+            border-radius: 50%;
             animation: screen2 1.5s ease-in-out infinite;
         }
 
@@ -216,22 +223,23 @@
 
         .screen3 {
             top: 40%;
-            left: 25%;
+            left: 23.5%;
             z-index: 2;
             height: 25%;
             position: fixed;
+            border-radius: 50%;
             animation: screen3 2s ease-in-out infinite;
         }
 
         @keyframes screen3 {
             0%{
-                top: 43%;
+                top: 33%;
             }
             50%{
-                top: 48%;
+                top: 38%;
             }
             100% {
-                top: 43%;
+                top: 33%;
             }
         }
 

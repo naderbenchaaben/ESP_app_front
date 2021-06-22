@@ -6,10 +6,12 @@ import axios from 'axios';
 import { url, headers } from 'config'
 import imageform from '../../assets/login-form.svg'
 import imgBackground from'../../assets/login-bg.svg'
-import imgPerson from '../../assets/login-person.svg'
+
 import screen1 from '../../assets/login-screen1.svg'
 import screen2 from '../../assets/login-screen2.svg'
 import screen3 from '../../assets/login-screen3.svg'
+import image1 from '../../assets/image1.jpg'
+import currency_dollar_blue from '../../assets/currency_dollar_blue.jpg'
 import imgIcons from '../../assets/login-icons.svg'
 import { withRouter } from 'react-router'
 class Register extends Component {
@@ -18,17 +20,28 @@ class Register extends Component {
     this.state = {
       
         email: '',
+         error: '',
         password: '',
+        passworderror: '',
         password_confirmation: '',
+        password_confirmationerror:'',
+      
         lastname: '',
+       
         firstname: '',
+        
         telnum: '',
+        telnumerror: '',
         companyname: '',
+        
         fieldofbusiness: '',
+        
         city: '',
+        
         if_admin: true,
         if_Topadmin: false,
-        if_client: false
+        if_client: false,
+        success: false
         
 
       
@@ -39,12 +52,36 @@ handleChange (e) {
     this.setState({ [e.target.name]: e.target.value });
   };
   goback=()=>{
-   this.props.history.push('/')
+   
+   {this.props.history.push('/')}
   }
   
   handleSubmit = e => {
-   
     e.preventDefault();
+    const {  email,
+   error,
+    password,
+   passworderror,
+    password_confirmation,
+    password_confirmationerror,
+    lastname,
+    firstname,
+    telnum,
+    telnumerror,
+    companyname,
+    fieldofbusiness,
+    city,
+    if_admin,
+    if_client,
+    if_Topadmin} = this.state;
+
+
+    if(!email ||!password ||!password_confirmation || !lastname|| !firstname|| !telnum ||!companyname || !fieldofbusiness || !city ){ this.setState({ error: '* veuillez remplir tous les champs' }) }
+    if(password && password.length<8){this.setState({ passworderror: '*   mot de passe a  8 caractères minimum' })}
+    if(password && password_confirmation&& password != password_confirmation){ this.setState({ password_confirmationerror: '*  mot de passe et confirmation non conforme' }) }
+    if(telnum && telnum.toString().length != 8){this.setState({ telnumerror : ' * numero telephone invalide'})}
+    
+
     
     console.log(this.state);
    
@@ -53,24 +90,10 @@ handleChange (e) {
 
     
     
-      const {
-        email,
-        password,
-        password_confirmation,
-        lastname,
-        firstname,
-        telnum,
-        companyname,
-        fieldofbusiness,
-        city,
-        if_admin,
-        if_client,
-        if_Topadmin
+     
 
-      } =  this.state;
-
-    // Entrez un mdp >= 6 caracteres
-    // Il faut mentionner que le mot de passe minimum 6 caracteres avant d'envoyer au serveur ;) 
+    
+    if(email ||password ||password_confirmation || lastname || firstname|| telnum ||companyname || fieldofbusiness || city){
     axios.post(url +"/users", {
      user:{
         email: email,
@@ -82,9 +105,9 @@ handleChange (e) {
         companyname: companyname,
         fieldofbusiness: fieldofbusiness,
         city: city,
-        if_admin: if_admin,
-        if_Topadmin: if_Topadmin,
-        if_client: if_client
+        if_admin:true,
+        if_Topadmin: false,
+        if_client: false
 
 
      }
@@ -107,16 +130,16 @@ handleChange (e) {
               }
             ).then( response =>{
               console.log(response)
+              this.setState({success : true})
             })
     }).catch(error =>{
       console.log("registration error ", error)
     })
-    
+  
 
-    
-this.props.history.push('/')
-    }
-    
+    }if (this.state.success == true)
+{this.props.history.push('/')}
+  }  
     render (){
         return(
             <div className="login">
@@ -125,60 +148,86 @@ this.props.history.push('/')
 
                 <div className="left">
                     <img className="background" src={imgBackground} alt="imgBackground"/>
-                    <img className="person" src={imgPerson} alt="imgPerson"/>
-                    <img className="screen1" src={screen1} alt="screen1"/>
-                    <img className="screen2" src={screen2} alt="screen2"/>
-                    <img className="screen3" src={screen3} alt="screen3"/>
+                    
+                   
+                    <img className="screen2" src={image1} />
+                    <img className="screen3" src={currency_dollar_blue}/>
                     <img className="icons" src={imgIcons} alt="imgIcons"/>
                 </div>
                 <div className="wrapper">
                     <img src={imageform} alt="imageform"/>
                     <form onSubmit={this.handleSubmit}>
-                        <h2>Inscription admin</h2>
+                        <h2>Inscription Admin d'Entreprise</h2>
 
-                        {/*<p className="error"> {error} </p> */}
+                       <p className="error"> {this.state.error} </p><br/>
 
-                        <label style={{ top: '30px' }} htmlFor="Email">Email</label>
+                        <div>
+                        <label style={{ top: '50px' }} htmlFor="Email">Email</label>
+                        
                         <br/>
                         <input onChange={this.handleChange} name="email" id="email" type="text"/>
                         <br/>
-                        <label style={{ top: '100px' }} className="password" htmlFor="password">Password</label>
+                        <label style={{ top: '135px' }} className="password" htmlFor="password">Passwor   </label>
+                        <p className="error"> {  this.state.passworderror} </p>
                         <br/>
-                        <input onChange={this.handleChange} name="password" id="password" type="password"/>
+                        <input onChange={this.handleChange} name="password" id="password" type="password"/><p className="error"> {  this.state.password_confirmationerror} </p>
                         <br/>
-                        <label style={{ top: '170px' }} className="password-conformation" htmlFor="password">Password-Confomation</label>
+                        <label style={{ top: '220px' }} className="password-conformation" htmlFor="password">Password-Confomation</label>
+                        
                         <br/>
                         <input onChange={this.handleChange} name="password_confirmation" id="password-confirmation" type="password"/>
                         <br/>
-                        <label style={{ top: '240px' }} htmlFor="Nom">Nom</label>
+                        <label style={{ top: '305px' }} htmlFor="Nom">Nom</label>
+                        
                         <br/>
                         <input onChange={this.handleChange} name="lastname" id="lastname" type="text"/>
                         <br/>
-                        <label style={{ top: '310px' }} htmlFor="Prénom">Prénom</label>
+                        <label style={{ top: '400px' }} htmlFor="Prénom">Prénom</label>
+                        
                         <br/>
                         <input onChange={this.handleChange} name="firstname" id="firstname" type="text"/>
                         <br/>
-                        <label style={{ top: '380px' }} htmlFor="telnum">Numero de télephone</label>
+                        <label style={{ top: '485px' }} htmlFor="telnum">Numero de télephone</label>
+                        
                         <br/>
                         <input onChange={this.handleChange} name="telnum" id="telnum" type="number"/>
                         <br/>
-                        <label style={{ top: '450px' }} htmlFor="Nom shop/Entreprise">Nom du shop/Entreprise</label>
-                        <br/>
+                        <label style={{ top: '570px' }} htmlFor="Nom shop/Entreprise">Nom du shop/Entreprise</label>
+                        
+                        <br/><p className="error"> {  this.state.telnumerror} </p>
                         <input onChange={this.handleChange} name="companyname" id="companyname" type="text"/>
                         <br/>
-                        <label style={{ top: '520px' }} htmlFor="Domaine d'activité">Domaine d'activité</label>
+                        <label style={{ top: '655px' }} htmlFor="Domaine d'activité">Domaine d'activité</label>
+                        
                         <br/>
                         <input onChange={this.handleChange} name="fieldofbusiness" id="fieldofbusiness" type="text"/>
                         <br/>
-                        <label style={{ top: '590px' }} htmlFor="ville">ville</label>
+                        <label style={{ top: '740px' }} htmlFor="ville">ville</label>
+                        
                         <br/>
                         <input onChange={this.handleChange} name="city" id="city" type="text"/>
                         <br/>
+                        
+                    </div>
+                    </form>
+                   <div style={{ paddingTop :320 }}>
+                     <span>
+                        <p className="errorr"> {this.state.error} </p>
+                         <p className="errorr"> {  this.state.telnumerror} </p>
+                         </span>
+                      <span>  <p className="errorr"> {  this.state.passworderror}   {  this.state.password_confirmationerror}  </p>
+                        
+                        <p> </p></span>
+                        
+                        
+                       
+
+                        </div>
                         <button
                          type="submit"
                          onClick={this.handleSubmit } 
                         
-                         >register</button>
+                         >S'inscrire</button>
                          <br/> 
                          <button
                          class="backb"
@@ -186,13 +235,11 @@ this.props.history.push('/')
                          onClick={this.goback } 
                         
                          >Retour</button>
-
-                    </form>
-                   
                 </div>  
-            </div>
+
+              </div>            
         );
     }
-}
-        
+  }
+     
     export default withRouter(Register);

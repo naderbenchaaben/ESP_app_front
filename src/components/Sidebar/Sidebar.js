@@ -74,7 +74,7 @@ function Sidebar({ color, image, routes , ...rest} ) {
           activeClassName="active"
           >
             <i className="nc-icon nc-chart-pie-35" />
-            <p>Dashboard</p>
+            <p>Tableau de bord</p>
           </NavLink>
           </li>
         </Nav>
@@ -162,20 +162,7 @@ function Sidebar({ color, image, routes , ...rest} ) {
           </NavLink>
           </li>
         </Nav>
-        <Nav>
-        <li
-          className={activeRoute( "/admin/icons")}
-                >
-          <NavLink
-          to="/admin/icons"
-          className="nav-link"
-          activeClassName="active"
-          >
-            <i className="nc-icon nc-circle-09" />
-            <p>icons</p>
-          </NavLink>
-          </li>
-        </Nav>
+        
         
         
 

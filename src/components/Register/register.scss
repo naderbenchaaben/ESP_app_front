@@ -19,13 +19,13 @@
 
         .errorr {
             color: #c83737;
-           
+             
         }
         .error {
             
             margin:5px 0 ;
             position: absolute;
-            top: 960px;   
+            top: 960px; 
             
         }
 
@@ -107,8 +107,7 @@
         #city {
             top: 765px;
         }
-
-
+        
         button {
             width: 450px;
             font-size: 20px;
@@ -269,6 +268,23 @@
     }
 
 }
+.dropdownn-content {
+    top: 680px;
+    margin-top: 250px;
+   // width: 450px;
+    background-color: #6741c6;}
+
+.dropdownn .dropdownn-content {
+    top: 680px;
+    margin-top: 250px;
+    //width: 450px;
+    display: block;}
+
+.dropdownn .dropbtnn {
+    top: 680px;
+    margin-top: 250px;
+    width: 450px;
+    background-color: #6741c6;}
 
 // responsive mobile
 @media (max-width: 700px) {

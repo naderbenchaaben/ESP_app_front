@@ -41,8 +41,11 @@ class AddProduct extends Component {
   }
 
   componentDidMount() {
-    this.categories = localStorage.getItem("categories");
+    this.setState({
+      categories: JSON.parse(localStorage.getItem("categories")),
+    });
   }
+
   handleChange = (e) => {
     if (e.target.name === "image") {
       this.setState({
@@ -122,12 +125,14 @@ class AddProduct extends Component {
       description,
       available_quantity,
       image,
+      categories,
     } = this.state;
 
     return (
       <Container fluid>
         <Row>
           <Col md="10">
+            {console.log(this.state.categories)}
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Ajout Produit</Card.Title>
@@ -155,13 +160,16 @@ class AddProduct extends Component {
                     <Col>
                       <div class="dropdown">
                         <select class="dropbtn">
-                          <option
-                            class="dropdown-content"
-                            value=""
-                            onchange={this.handleChange}
-                          >
-                            select categorie
-                          </option>
+                          <option>------</option>
+                          {/**/}{" "}
+                          {this.state.categories.map((option) => (
+                            <option
+                              key={option.id}
+                              value={option.category_name}
+                            >
+                              {option.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                     </Col>

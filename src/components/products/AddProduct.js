@@ -33,6 +33,7 @@ class AddProduct extends Component {
       description: "",
       available_quantity: "",
       category: "",
+      company_id: "",
       image: "",
       categories: [],
       error: "",
@@ -44,6 +45,9 @@ class AddProduct extends Component {
     this.setState({
       categories: JSON.parse(localStorage.getItem("categories")),
     });
+    this.setState({
+      company_id: JSON.parse(localStorage.getItem("company")).id,
+    });
   }
 
   handleChange = (e) => {
@@ -52,6 +56,7 @@ class AddProduct extends Component {
         [e.target.name]: e.target.files[0],
       });
     } else {
+      console.log(this.state.company_id);
       this.setState({ [e.target.name]: e.target.value });
     }
   };
@@ -72,6 +77,7 @@ class AddProduct extends Component {
       available_quantity,
       error,
       image,
+      company_id,
     } = this.state;
 
     if (
@@ -103,6 +109,7 @@ class AddProduct extends Component {
       form.append("description", description);
       form.append("available_quantity", available_quantity);
       form.append("image", image);
+      form.append("company_id", company_id);
       console.log(image);
       axios
         .post(url + "/api/v2/products", form)
@@ -259,7 +266,6 @@ class AddProduct extends Component {
               </Card.Body>
             </Card>
           </Col>
-          ////////////////////////////////////////////////////////////
         </Row>
       </Container>
     );
@@ -268,6 +274,7 @@ class AddProduct extends Component {
 const mapStateToProps = (state) => {
   return {
     category: state.categoriesReducer,
+    company: state.companyReducer,
   };
 };
 

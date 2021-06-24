@@ -4,6 +4,8 @@ import { Redirect, Link } from "react-router-dom";
 import { MultiUploader } from "../Uploader/MultiUploader";
 import "./product.scss";
 import { url } from "config";
+import star from "../../assets/img/star-rating.jpg";
+import Rating from "./Rating";
 import {
   Badge,
   Button,
@@ -22,22 +24,54 @@ const Products = (props) => {
   const [products, setProducts] = useState([]);
   const [gotprod, setGotprod] = useState(0);
   const [updateproduct, setUpdatedproduct] = useState();
+  const [gotrating, setGotrating] = useState(0);
+  const [score, setScore] = useState({});
 
   console.log(products);
 
   const fetchingproducts = () => {
     axios
-      .get(url + "/api/v2/products")
+      .get(url + "/api/v2/p/" + JSON.parse(localStorage.getItem("company")).id)
       .then((res) => {
-        setProducts(res.data);
+        setProducts(res.data.product);
         setGotprod(res.data.length);
 
         console.log(products);
       })
       .catch((res) => console.log(res));
   };
+  const fetchrating = (a) => {
+    var s;
+    {
+      axios.get(url + "/api/v3/avgrating/" + a).then((res) => {
+        console.log(res.data.rating);
+        s = res.data.rating;
+
+        console.log("the rating", s);
+        localStorage.setItem(a, s);
+      });
+    }
+
+    return s;
+  };
+  function displayrating(a) {
+    {
+      fetchrating(a);
+    }
+    return (
+      <div style={{ paddingLeft: 20, paddingRight: 30 }}>
+        <span>
+          <img width="40px" src={star}></img>
+          <p>
+            <b>{localStorage.getItem(a)} / 5</b>{" "}
+          </p>
+        </span>
+      </div>
+    );
+  }
   useEffect(() => {
     console.log("a");
+
     fetchingproducts();
   }, [gotprod]);
   const deleteproduct = (id) => {
@@ -45,9 +79,6 @@ const Products = (props) => {
       console.log(res);
       setGotprod(gotprod - 1);
     });
-  };
-  const prodtobeupdated = (p) => {
-    localStorage.setItem("product", p.id);
   };
 
   const list = products.map((p) => {
@@ -68,37 +99,53 @@ const Products = (props) => {
                 <Row>
                   <br />
                   <div>
-                    <p>
-                      <b>Référence : {p.ref_product}</b>{" "}
+                    <p
+                      style={{
+                        paddingLeft: 20,
+                      }}
+                    >
+                      <b> Référence : {p.ref_product}</b>{" "}
                     </p>
-                    <p>
-                      <b>Quantité en stock : {p.available_quantity} </b>
+                    <p
+                      style={{
+                        paddingLeft: 20,
+                      }}
+                    >
+                      <b> Quantité en stock : {p.available_quantity} </b>
                     </p>
-                    <p>
-                      {" "}
-                      <b>Prix: {p.price} DT</b>{" "}
+                    <p
+                      style={{
+                        paddingLeft: 20,
+                      }}
+                    >
+                      <b> Prix: {p.price} DT</b>{" "}
                     </p>
-                    <p>
-                      <b> description bref: {p.shortDesc}</b>{" "}
-                    </p>
-                    <p>
-                      <b> Description: {p.description}</b>{" "}
+
+                    <p
+                      style={{
+                        paddingLeft: 20,
+                      }}
+                    >
+                      <p>
+                        {" "}
+                        <b> Description : </b>
+                      </p>
+                      <p>
+                        {" "}
+                        <b>{p.description}</b>
+                      </p>
                     </p>
                   </div>
                 </Row>
               </Col>
               <Col xs="5">
-                <img
-                  width="200"
-                  align="middle"
-                  className="rounded-circle"
-                  src={p.image}
-                ></img>
+                <img width="200" align="middle" src={p.image}></img>
               </Col>
             </Row>
           </Card.Body>
           <Card.Footer>
             <hr></hr>
+            {displayrating(p.id)}
             <span>
               <Link to="./UpdateProduct">
                 <button

@@ -24,24 +24,22 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import AddProduct from "components/products/AddProduct.js";
 import AddCategory from "components/categories/AddCategory.js";
-import Clients from "components/clients/Clients.js"
-import Orders from "components/orders/Orders.js"
-import Pending from "components/orders/Pending"
-import Processing from "components/orders/Processing"
-import Order from "components/orders/Order"
-import Ready from "components/orders/Ready"
-import Completed from "components/orders/Completed"
-import Oldclients from "components/clients/Oldclients.js"
+import Clients from "components/clients/Clients.js";
+import Orders from "components/orders/Orders.js";
+import Pending from "components/orders/Pending";
+import Processing from "components/orders/Processing";
+import Order from "components/orders/Order";
+import Ready from "components/orders/Ready";
+import Completed from "components/orders/Completed";
+import Oldclients from "components/clients/Oldclients.js";
 import UpdateProduct from "components/products/UpdateProduct.js";
 import Products from "components/products/products.js";
 import Company from "components/company/company.js";
+import Facture from "components/facture/Facture";
 import Categories from "components/categories/Categories.js";
 import Updatecategory from "components/categories/Updatecategory";
 
-
-
 const dashboardRoutes = [
- 
   {
     path: "/dashboard",
     name: "Tableau de bord",
@@ -160,7 +158,8 @@ const dashboardRoutes = [
     icon: "nc-icon nc-bell-55",
     component: Orders,
     layout: "/admin",
-  },{
+  },
+  {
     path: "/Pending",
     name: "commandes en attente",
     icon: "nc-icon nc-bell-55",
@@ -181,7 +180,7 @@ const dashboardRoutes = [
     component: Ready,
     layout: "/admin",
   },
-   {
+  {
     path: "/Completed",
     name: "commandes Completées",
     icon: "nc-icon nc-bell-55",
@@ -194,12 +193,15 @@ const dashboardRoutes = [
     icon: "nc-icon nc-bell-55",
     component: Order,
     layout: "/admin",
-  }
-  
-
-  
-  
+  },
+  {
+    path: "/Facture",
+    name: "Facture",
+    icon: "nc-icon nc-bell-55",
+    component: Facture,
+    layout: "/admin",
+  },
 ];
 
 export default dashboardRoutes;
-UpdateProduct
+UpdateProduct;

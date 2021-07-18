@@ -2,6 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 import { url } from "config";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   Badge,
   Button,
@@ -25,12 +26,13 @@ import CardFooter from "components/Card/CardFooter.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 const Orderitems = (props) => {
+  let history = useHistory();
   const [orderitems, setOrderitems] = useState([]);
   const [client, setClient] = useState({});
   const [products, setProducts] = useState([]);
   const [gotprod, setGotprod] = useState(0);
   const [gotcl, setGotcl] = useState(0);
-  const [g, setG] = useState(0);
+  const [stage, setStage] = useState(null);
   const [gotordits, setGotordits] = useState(0);
   var o = JSON.parse(localStorage.getItem("order"));
   console.log(o);
@@ -58,9 +60,9 @@ const Orderitems = (props) => {
   }
   const fetchingproducts = () => {
     axios
-      .get(url + "/api/v2/products")
+      .get(url + "/api/v2/p/" + JSON.parse(localStorage.getItem("company")).id)
       .then((res) => {
-        setProducts(res.data);
+        setProducts(res.data.product);
         setGotprod(res.data.length);
 
         console.log(products);
@@ -73,7 +75,7 @@ const Orderitems = (props) => {
       fetchingorderitems();
       getclient(o);
     };
-  }, [gotcl, gotordits, gotprod]);
+  }, [gotcl, gotordits, gotprod, stage]);
 
   function typeorder(c) {
     if (c.order_type == "collection") {
@@ -87,12 +89,8 @@ const Orderitems = (props) => {
     if (c.order_type == "collection") {
       return (
         <div>
-          {" "}
-          <p> Data de collection de commande {c.order_pick_up_date} </p>
-          <p>
-            {" "}
-            horaire de collection : {c.order_pick_up_time.slice(11, 16)}{" "}
-          </p>{" "}
+          <p> Data de collection de commande : {c.order_pick_up_date} </p>
+          <p>horaire de collection : {c.order_pick_up_time}</p>
         </div>
       );
     }
@@ -124,15 +122,16 @@ const Orderitems = (props) => {
       d = "checked";
     }
 
+    function onChangeValue(event) {
+      console.log(event.target.value);
+      setStage(event.target.value);
+    }
     return (
-      <div>
-        <input type="radio" value="pending" name="stage" checked={a} /> en
-        attente
-        <input type="radio" value="processing" name="stage" checked={b} /> en
-        taitement
-        <input type="radio" value="ready" name="stage" checked={c} /> prète
-        <input type="radio" value="completed" name="stage" checked={d} />{" "}
-        complète
+      <div onChange={onChangeValue}>
+        <input type="radio" value="pending" name="stage" /> en attente
+        <input type="radio" value="processing" name="stage" /> en taitement
+        <input type="radio" value="ready" name="stage" /> prète
+        <input type="radio" value="completed" name="stage" /> complète
       </div>
     );
   }
@@ -229,7 +228,7 @@ const Orderitems = (props) => {
                 <b style={{ color: "#c83737" }}>Type de Commande : </b>
                 <b>{typeorder(o)} </b>
               </p>
-              {typeofinformation(o)}{" "}
+              {typeofinformation(o)}
             </div>
           </div>
 
@@ -239,10 +238,28 @@ const Orderitems = (props) => {
     );
   }
 
+  function updatestage(e) {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("stage", stage);
+    axios
+      .put(url + "/api/v2/o/" + o.id, form)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((res) => {
+        console.log("updating stage", res);
+      });
+    history.goBack();
+  }
+
   return (
     <>
       <div></div>
       <div>{display()}</div>
+      <button className="commentaires" type="submit" onClick={updatestage}>
+        Confirmer modificationde stade
+      </button>
     </>
   );
 };

@@ -5,6 +5,7 @@ import { MultiUploader } from "../Uploader/MultiUploader";
 import "./product.scss";
 import { url } from "config";
 import star from "../../assets/img/star-rating.jpg";
+import { useHistory } from "react-router-dom";
 import Rating from "./Rating";
 import {
   Badge,
@@ -46,7 +47,7 @@ const Products = (props) => {
       axios.get(url + "/api/v3/avgrating/" + a).then((res) => {
         console.log(res.data.rating);
         s = res.data.rating;
-
+        setGotrating(2);
         console.log("the rating", s);
         localStorage.setItem(a, s);
       });
@@ -63,21 +64,19 @@ const Products = (props) => {
         <span>
           <img width="40px" src={star}></img>
           <p>
-            <b>{localStorage.getItem(a)} / 5</b>{" "}
+            <b>{parseFloat(localStorage.getItem(a)).toFixed(1)} / 5</b>{" "}
           </p>
         </span>
       </div>
     );
   }
   useEffect(() => {
-    console.log("a");
-
     fetchingproducts();
   }, [gotprod]);
   const deleteproduct = (id) => {
     axios.delete(url + "/api/v2/products/" + id).then((res) => {
       console.log(res);
-      setGotprod(gotprod - 1);
+      setGotprod(2);
     });
   };
 
@@ -166,11 +165,11 @@ const Products = (props) => {
               </button>
             </span>
 
-            <Link to="./UpdateProduct">
+            <Link to="./Comments">
               <button
                 className="commentaires"
                 onClick={() =>
-                  localStorage.setItem("product", JSON.stringify(p))
+                  localStorage.setItem("productcomments", JSON.stringify(p))
                 }
               >
                 Commentaires

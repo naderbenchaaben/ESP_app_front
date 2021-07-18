@@ -36,7 +36,7 @@ const Categories = (props) => {
         setCategories(res.data.categories);
         setGotcat(res.data.length);
         console.log(gotcat);
-        props.categoryAction(res.data);
+        props.categoryAction(res.data.categories);
 
         console.log(categories);
       })
@@ -98,7 +98,7 @@ const Categories = (props) => {
     <>
       <div>
         <Link to="./AddCategory">
-          <button className="product_add_btn"> Ajouter Category</button>
+          <button className="category_add_btn"> Ajouter Categorie</button>
         </Link>
       </div>
 

@@ -29,6 +29,7 @@ import Orders from "components/orders/Orders.js";
 import Pending from "components/orders/Pending";
 import Processing from "components/orders/Processing";
 import Order from "components/orders/Order";
+import Comments from "components/products/Comments";
 import Ready from "components/orders/Ready";
 import Completed from "components/orders/Completed";
 import Oldclients from "components/clients/Oldclients.js";
@@ -147,7 +148,7 @@ const dashboardRoutes = [
   },
   {
     path: "/Oldclients",
-    name: "anciens clients ",
+    name: "tous les clients ",
     icon: "nc-icon nc-bell-55",
     component: Oldclients,
     layout: "/admin",
@@ -199,6 +200,13 @@ const dashboardRoutes = [
     name: "Facture",
     icon: "nc-icon nc-bell-55",
     component: Facture,
+    layout: "/admin",
+  },
+  {
+    path: "/Comments",
+    name: "Comments",
+    icon: "nc-icon nc-bell-55",
+    component: Comments,
     layout: "/admin",
   },
 ];

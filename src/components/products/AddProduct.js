@@ -29,10 +29,9 @@ class AddProduct extends Component {
       product_name: "",
       ref_product: "",
       price: "",
-      shortDesc: "",
       description: "",
       available_quantity: "",
-      category: "",
+      category_id: "",
       company_id: "",
       image: "",
       categories: [],
@@ -67,7 +66,7 @@ class AddProduct extends Component {
     });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const {
       product_name,
@@ -78,6 +77,7 @@ class AddProduct extends Component {
       error,
       image,
       company_id,
+      category_id,
     } = this.state;
 
     if (
@@ -100,7 +100,8 @@ class AddProduct extends Component {
       ref_product &&
       price &&
       description &&
-      available_quantity
+      available_quantity &&
+      category_id
     ) {
       const form = new FormData();
       form.append("product_name", product_name);
@@ -110,12 +111,12 @@ class AddProduct extends Component {
       form.append("available_quantity", available_quantity);
       form.append("image", image);
       form.append("company_id", company_id);
+      form.append("category_id", category_id);
       console.log(image);
-      axios
+      await axios
         .post(url + "/api/v2/products", form)
         .then(function (response) {
           console.log("product-addition", response);
-          this.props.history.push("./");
         })
 
         .catch(function (error) {
@@ -137,6 +138,15 @@ class AddProduct extends Component {
 
     return (
       <Container fluid>
+        <div>
+          <button
+            className="product_add_btn"
+            onClick={(e) => this.props.history.goBack()}
+          >
+            {" "}
+            Retour
+          </button>
+        </div>
         <Row>
           <Col md="10">
             {console.log(this.state.categories)}
@@ -166,15 +176,16 @@ class AddProduct extends Component {
                     </Col>
                     <Col>
                       <div class="dropdown">
-                        <select class="dropbtn">
+                        <select
+                          class="dropbtn"
+                          name="category_id"
+                          onChange={this.handleChange}
+                        >
                           <option>------</option>
-                          {/**/}{" "}
+
                           {this.state.categories.map((option) => (
-                            <option
-                              key={option.id}
-                              value={option.category_name}
-                            >
-                              {option.name}
+                            <option key={option.id} value={option.id}>
+                              {option.category_name}
                             </option>
                           ))}
                         </select>

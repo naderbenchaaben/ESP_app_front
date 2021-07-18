@@ -24,7 +24,7 @@ const Rating = ({ ID }) => {
     <div>
       <span>
         <img width="40px" src={star}></img>
-        <p> {score}</p>
+        <p> {parseFloat(score).toFixed(2)}</p>
       </span>
     </div>
   );
